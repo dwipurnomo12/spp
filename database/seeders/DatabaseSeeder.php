@@ -5,8 +5,11 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Admin;
+use App\Models\Biaya;
 use App\Models\Kelas;
 use App\Models\Siswa;
+use App\Models\TahunAjaran;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,11 +20,18 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::create([
-            'name'      => 'admin',
-            'email'     => 'admin@gmail.com',
             'username'  => 'admin',
             'password'  => bcrypt('1234'),
-            'role_id'   => 1
+        ]);
+
+        User::create([
+            'username'  => '1212321',
+            'password'  => bcrypt('1234'),
+        ]);
+
+        Admin::create([
+            'user_id'   => 1,
+            'name'      => 'Admin'
         ]);
 
         Role::create([
@@ -42,21 +52,21 @@ class DatabaseSeeder extends Seeder
 
         Siswa::create([
             'nis'       => '1212321',
-            'username'  => '1212321',
             'nm_siswa'  => 'Budiono Siregar',
             'j_kelamin' => 'laki-laki',
             'alamat'    => 'Desa karangmulyo, Purwodadi, Purworejo',
             'no_hp'     => '081229098124',
-            'kelas_id'  => 1
+            'kelas_id'  => 1,
+            'user_id'   => 2,
         ]);
-        Siswa::create([
-            'nis'       => '9872661',
-            'username'  => '9872661',
-            'nm_siswa'  => 'Robert Davis Chaniago',
-            'j_kelamin' => 'laki-laki',
-            'alamat'    => 'Desa Keduren, Purwodadi, Purworejo',
-            'no_hp'     => '0812290091874',
-            'kelas_id'  => 1
+
+        TahunAjaran::create([
+            'thn_ajaran'    => '2022/2024'
+        ]);
+
+        Biaya::create([
+            'jenis_pembayaran'  => 'SPP',
+            'biaya'             => '150000'
         ]);
     }
 }

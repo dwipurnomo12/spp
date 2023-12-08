@@ -18,10 +18,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
+        'username',
         'password',
-        'role_id'
     ];
 
     /**
@@ -44,8 +42,23 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function role()
+    public function IsAdmin()
     {
-        return $this->belongsTo(Role::class, 'role_id');
+        return $this->admin;
+    }
+
+    public function IsSiswa()
+    {
+        return $this->siswa;
+    }
+
+    public function admin()
+    {
+        return $this->hasOne(Admin::class);
+    }
+
+    public function siswa()
+    {
+        return $this->hasOne(Siswa::class);
     }
 }

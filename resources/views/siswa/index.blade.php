@@ -33,13 +33,54 @@
                                     <h4 class="card-title">Data Siswa</h4>
                                 </div>
                                 <div class="col-md-6">
+                                    <div class="modal fade" id="importDataSiswa" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Import Data Siswa</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form action="{{ route('siswa.import') }}" method="post"
+                                                    enctype="multipart/form-data">
+                                                    <div class="modal-body">
+                                                        @csrf
+                                                        <div class="form-group">
+                                                            <label for="file">Pilih file Excel</label>
+                                                            <input type="file" name="file" class="form-control"
+                                                                accept=".xlsx, .xls">
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <a href="{{ route('download-excel', ['filename' => 'format_excel.xlsx']) }}"
+                                                            class="btn btn-sm btn-success float-start"
+                                                            download="format_excel.xlsx">
+                                                            Unduh Format .xlsx
+                                                        </a>
 
-                                    <a href="/siswa/" class="btn btn-sm btn-success mb-2 float-right"><i
-                                            class="fa fa-regular fa-file-excel"></i> Import Data Siswa
-                                    </a>
-                                    <a href="/siswa/create" class="btn btn-sm btn-primary mb-2 float-right"><i
-                                            class="fa fa-plus"></i> Tambah
-                                        Siswa</a>
+
+
+                                                        <button type="submit"
+                                                            class="btn btn-sm btn-primary">Import</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix">
+                                        <button type="button" class="btn btn-sm btn-success float-right"
+                                            data-toggle="modal" data-target="#importDataSiswa">
+                                            <i class="fas fa-regular fa-file-import"></i> Import Data Siswa
+                                        </button>
+                                        <a href="/siswa/create" class="btn btn-sm btn-primary mb-2 float-right mr-2">
+                                            <i class="fa fa-plus"></i> Tambah Siswa
+                                        </a>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -61,27 +102,26 @@
                                                             </option>
                                                         @endforeach
                                                     </select>
-                                                    <div class="input-group-append ml-2">
-                                                        <button type="submit" class="btn btn-sm btn-primary">
-                                                            Filter</button>
+                                                    <div class="ml-2 mt-1">
+                                                        <button type="submit" class="btn btn-sm btn-primary"><i
+                                                                class="fa-solid fa-magnifying-glass"></i> Filter</button>
 
                                                         <a href="/siswa/" class="btn btn-sm btn-danger ml-1"
-                                                            id="refresh_btn">
+                                                            id="refresh_btn"><i class="fa fa-solid fa-rotate-right"></i>
                                                             Refresh</a>
 
                                                         <a href="/siswa/export?kelas_id={{ request('kelas_id') }}"
                                                             class="btn ml-2 btn-sm btn-warning">
                                                             <i class="fa fa-regular fa-file-excel"></i> Export Data Siswa
                                                         </a>
-
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </form>
                             </div>
+
 
                             <div class="table-responsive">
                                 <table id="table_id" class="display table table-striped table-hover">

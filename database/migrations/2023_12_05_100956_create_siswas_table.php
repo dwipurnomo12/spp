@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('siswas', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('nis')->unique();
-            $table->string('username');
             $table->string('nm_siswa');
             $table->enum('j_kelamin', ['laki-laki', 'perempuan']);
             $table->longText('alamat');
             $table->string('no_hp');
             $table->foreignId('kelas_id');
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

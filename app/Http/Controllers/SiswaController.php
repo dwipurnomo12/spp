@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Kelas;
 use App\Models\Siswa;
+use App\Imports\SiswaImport;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
 use App\Exports\SiswasExport;
+use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class SiswaController extends Controller
 {
@@ -60,7 +63,7 @@ class SiswaController extends Controller
             'j_kelamin' => 'required',
             'alamat'    => 'required',
             'no_hp'     => 'required',
-            'kelas_id'  => 'required'
+            'kelas_id'  => 'required',
         ], [
             'nm_siswa.required'  => 'Form wajib diisi !',
             'nis.required'       => 'Form Wajib diisi !',
@@ -68,21 +71,26 @@ class SiswaController extends Controller
             'j_kelamin.required' => 'Pilih jenis kelamin !',
             'alamat.required'    => 'Form wajib diisi !',
             'no_hp.required'     => 'Form wajib diisi !',
-            'kelas_id.required'  => 'Form Wajib diisi !'
+            'kelas_id.required'  => 'Form Wajib diisi !',
         ]);
 
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
 
+        $user = User::create([
+            'username'      => $request->nis,
+            'password'      => bcrypt('1234'),
+        ]);
+
         Siswa::create([
             'nm_siswa'      => $request->nm_siswa,
             'nis'           => $request->nis,
-            'username'      => $request->nis,
             'j_kelamin'     => $request->j_kelamin,
             'alamat'        => $request->alamat,
             'no_hp'         => $request->no_hp,
             'kelas_id'      => $request->kelas_id,
+            'user_id'       => $user->id
         ]);
 
         return redirect('/siswa')->with('success', 'Berhasil menambahkan data baru');
@@ -132,7 +140,6 @@ class SiswaController extends Controller
             $siswa->update([
                 'nm_siswa'  => $request->nm_siswa,
                 'nis'       => $request->nis,
-                'username'  => $request->nis,
                 'j_kelamin' => $request->j_kelamin,
                 'alamat'    => $request->alamat,
                 'no_hp'     => $request->no_hp,
@@ -163,7 +170,7 @@ class SiswaController extends Controller
     }
 
     /**
-     * Exports excel
+     * Exports data siswa excel
      */
     public function export(Request $request)
     {
@@ -176,5 +183,30 @@ class SiswaController extends Controller
         }
 
         return Excel::download(new SiswasExport($siswas), 'data_siswa.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file'  => 'required|file|mimes:xlsx,xls'
+        ], [
+            'file.required'     => 'Tidak boleh kosong !',
+            'file.file'         => 'Harus ber-type file !',
+            'file.mimes'        => 'FOrmat yang di izinkan xlsx, xls'
+        ]);
+
+        $file = $request->file('file');
+        Excel::import(new SiswaImport, $file);
+        return redirect('/siswa')->with('success', 'Data berhasil diimpor.');
+    }
+
+    public function downloadExcel(Request $request, $filename)
+    {
+        $path = storage_path("format excel/{$filename}");
+        if (!Storage::exists("format excel/{$filename}")) {
+            abort(404);
+        }
+
+        return response()->download($path);
     }
 }

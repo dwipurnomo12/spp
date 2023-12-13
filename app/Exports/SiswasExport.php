@@ -30,6 +30,7 @@ class SiswasExport implements FromCollection, WithHeadings
                 'No HP'     => $siswa->no_hp,
                 'Alamat'    => $siswa->alamat,
                 'Kelas'     => optional($siswa->kelas)->kelas,
+                'Angkatan'  => $siswa->thn_angkatan,
             ];
         });
     }
@@ -43,7 +44,8 @@ class SiswasExport implements FromCollection, WithHeadings
             'Kelamin',
             'No HP',
             'Alamat',
-            'Kelas'
+            'Kelas',
+            'Angkatan'
         ];
     }
 }

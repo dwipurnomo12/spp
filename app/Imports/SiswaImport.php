@@ -24,21 +24,29 @@ class SiswaImport implements ToModel
             return null;
         }
 
-        $user = User::create([
-            'username' => $row[7],
-            'password' => Hash::make($row[8]),
+        $kelas = Kelas::firstOrCreate([
+            'kelas'      => $row[6]
         ]);
 
+        if (!$kelas->exists) {
+            $kelas->keterangan = 'Tambahkan Keterangan Kelas';
+            $kelas->save();
+        }
 
-        $kelas = Kelas::firstOrCreate(['kelas' => $row[6]]);
+        $user = User::create([
+            'username' => $row[8],
+            'password' => Hash::make($row[9]),
+        ]);
+
         $siswa =  new Siswa([
-            'nm_siswa'  => $row[1],
-            'nis'       => $row[2],
-            'j_kelamin' => $row[3],
-            'no_hp'     => $row[4],
-            'alamat'    => $row[5],
-            'kelas_id'  => $kelas->id,
-            'user_id'   => $user->id
+            'nm_siswa'      => $row[1],
+            'nis'           => $row[2],
+            'j_kelamin'     => $row[3],
+            'no_hp'         => $row[4],
+            'alamat'        => $row[5],
+            'kelas_id'      => $kelas->id,
+            'thn_angkatan'  => intval($row[7]),
+            'user_id'       => $user->id
         ]);
 
         $siswa->user()->associate($user);

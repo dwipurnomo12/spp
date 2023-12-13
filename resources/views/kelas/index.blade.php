@@ -46,6 +46,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Kelas</th>
+                                            <th>Tingkat</th>
                                             <th>Keterangan</th>
                                             <th>Opsi</th>
                                         </tr>
@@ -55,6 +56,7 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $kelas->kelas }}</td>
+                                                <td>{{ $kelas->tingkat->tingkat }}</td>
                                                 <td>{{ $kelas->keterangan }}</td>
                                                 <td>
                                                     <a href="/kelas/{{ $kelas->id }}/edit"

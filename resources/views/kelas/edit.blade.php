@@ -47,6 +47,21 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
+                                    <label for="text">tingkat <span style="color: red">*</span></label>
+                                    <select class="form-control" aria-label="Default select example" name="tingkat_id">
+                                        <option value="" selected>Pilih Tingkat</option>
+                                        @foreach ($tingkats as $tingkat)
+                                            <option value="{{ $tingkat->id }}"
+                                                {{ $kelas->tingkat_id == $tingkat->id ? 'selected' : '' }}>
+                                                {{ $tingkat->tingkat }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('tingkat_id')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
                                     <label for="keterangan">Keterangan</label>
                                     <textarea class="form-control" name="keterangan" rows="5">{{ $kelas->keterangan }}</textarea>
                                     @error('keterangan')

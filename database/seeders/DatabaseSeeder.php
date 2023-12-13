@@ -9,6 +9,7 @@ use App\Models\Admin;
 use App\Models\Biaya;
 use App\Models\Kelas;
 use App\Models\Siswa;
+use App\Models\Tingkat;
 use App\Models\TahunAjaran;
 use Illuminate\Database\Seeder;
 
@@ -43,21 +44,34 @@ class DatabaseSeeder extends Seeder
 
         Kelas::create([
             'kelas'         => 'X TKR A',
-            'keterangan'    => 'Teknik Kendaraan Ringan A'
+            'keterangan'    => 'Teknik Kendaraan Ringan A',
+            'tingkat_id'    => 1
         ]);
         Kelas::create([
             'kelas'         => 'X TKR B',
-            'keterangan'    => 'Teknik Kendaraan Ringan B'
+            'keterangan'    => 'Teknik Kendaraan Ringan B',
+            'tingkat_id'    => 1
+        ]);
+        Kelas::create([
+            'kelas'         => 'XI TKR A',
+            'keterangan'    => 'Teknik Kendaraan Ringan A',
+            'tingkat_id'    => 2
+        ]);
+        Kelas::create([
+            'kelas'         => 'XI TKR B',
+            'keterangan'    => 'Teknik Kendaraan Ringan B',
+            'tingkat_id'    => 2
         ]);
 
         Siswa::create([
-            'nis'       => '1212321',
-            'nm_siswa'  => 'Budiono Siregar',
-            'j_kelamin' => 'laki-laki',
-            'alamat'    => 'Desa karangmulyo, Purwodadi, Purworejo',
-            'no_hp'     => '081229098124',
-            'kelas_id'  => 1,
-            'user_id'   => 2,
+            'nis'           => '1212321',
+            'nm_siswa'      => 'Budiono Siregar',
+            'j_kelamin'     => 'laki-laki',
+            'alamat'        => 'Karangmulyo, Purwodadi',
+            'no_hp'         => '081229098124',
+            'thn_angkatan'  => '2022',
+            'kelas_id'      => 1,
+            'user_id'       => 2,
         ]);
 
         TahunAjaran::create([
@@ -67,6 +81,16 @@ class DatabaseSeeder extends Seeder
         Biaya::create([
             'jenis_pembayaran'  => 'SPP',
             'biaya'             => '150000'
+        ]);
+
+        Tingkat::create([
+            'tingkat'   => 'X'
+        ]);
+        Tingkat::create([
+            'tingkat'   => 'XI'
+        ]);
+        Tingkat::create([
+            'tingkat'   => 'XII'
         ]);
     }
 }

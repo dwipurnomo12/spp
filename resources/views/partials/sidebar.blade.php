@@ -2,7 +2,7 @@
     <div class="sidebar-content">
         <div class="user">
             <div class="avatar-sm float-left mr-2">
-                <img src="../assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+                <img src="/assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
             </div>
             <div class="info">
                 <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
@@ -113,6 +113,19 @@
                             </li>
                         </ul>
                     </div>
+                </li>
+
+                <li class="nav-section">
+                    <span class="sidebar-mini-icon">
+                        <i class="fa fa-ellipsis-h"></i>
+                    </span>
+                    <h4 class="text-section">Pembayaran</h4>
+                </li>
+                <li class="nav-item">
+                    <a href="/tambah-tagihan">
+                        <i class="fa fa-solid fa-money-bill-wave"></i>
+                        <p>Tambah Tagihan</p>
+                    </a>
                 </li>
             @else
             @endif

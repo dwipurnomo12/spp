@@ -15,7 +15,7 @@
                         <i class="flaticon-right-arrow"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="/kenaikan-kelas">Pembaharuan Data Siswa</a>
+                        <a href="/kelulusan">Pembaharuan Data Siswa</a>
                     </li>
                 </ul>
             </div>
@@ -35,23 +35,17 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h4 class="card-title">Kenaikan Kelas</h4>
+                                    <h4 class="card-title">Kelulusan Siswa</h4>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="card bg-primary">
-                                <div class="card-body text-white">
-                                    FIlter kelas untuk memudahkan pencarian data siswa berdasarkan kelas. Lalu checklist
-                                    data siswa dan pilih kelas baru, kemudian <b>Update !</b>
-                                </div>
-                            </div>
                             <div class="form-group">
-                                <form action="/kenaikan-kelas/filter-data" method="GET">
+                                <form action="/kelulusan/filter-data" method="GET">
                                     <div class="row">
                                         <div class="col">
                                             <div class="form-group">
-                                                <label for="text">Tentukan Kelas Yang Akan Di Naikkan</label>
+                                                <label for="text">Tentukan Kelas Yang Akan Di Luluskan</label>
                                                 <div class="input-group">
                                                     <select class="form-control" aria-label="Default select example"
                                                         name="kelas_id">
@@ -67,9 +61,10 @@
                                                         <button type="submit" class="btn btn-sm btn-primary"><i
                                                                 class="fa-solid fa-magnifying-glass"></i> Filter</button>
 
-                                                        <a href="/kenaikan-kelas/" class="btn btn-sm btn-danger ml-1"
+                                                        <a href="/kelulusan/" class="btn btn-sm btn-danger ml-1"
                                                             id="refresh_btn"><i class="fa fa-solid fa-rotate-right"></i>
                                                             Refresh</a>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -77,30 +72,12 @@
                                     </div>
                                 </form>
                             </div>
-                            <div class="form-group">
-                                <form action="/kenaikan-kelas/update" method="POST">
-                                    @csrf
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="kelas_baru">Pilih Kelas Baru</label>
-                                                <div class="input-group">
-                                                    <select class="form-control" name="kelas_baru">
-                                                        <option value="">Pilih Kelas</option>
-                                                        @foreach ($kelases as $kelas)
-                                                            <option value="{{ $kelas->id }}">{{ $kelas->kelas }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    <div class="ml-2 mt-1">
-                                                        <button type="submit" class="btn btn-sm btn-success">Update
-                                                            Kelas</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <div class="row my-3">
+                            <form action="{{ route('proses-lulus') }}" method="POST">
+                                @csrf
+
+                                <div class="card-body">
+                                    <div class="row">
                                         <div class="col">
                                             <div class="form-group ml-3">
                                                 <input class="form-check-input" type="checkbox" value=""
@@ -109,44 +86,50 @@
                                                     Pilih Semua Siswa
                                                 </label>
                                             </div>
+                                            <button type="submit" class="btn btn-sm btn-success ml-1">
+                                                <i class="fas fa-regular fa-graduation-cap"></i> Proses Kelulusan
+                                            </button>
                                         </div>
                                     </div>
-                                    <div class="table-responsive">
-                                        <table id="table_id" class="display table table-striped table-hover">
-                                            <thead>
+                                </div>
+
+
+                                <div class="table-responsive">
+                                    <table id="table_id" class="display table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Nama</th>
+                                                <th>Nis</th>
+                                                <th>Kelamin</th>
+                                                <th>No.HP</th>
+                                                <th>Alamat</th>
+                                                <th>Kelas</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($siswas as $siswa)
                                                 <tr>
-                                                    <th>No</th>
-                                                    <th>Nama</th>
-                                                    <th>Nis</th>
-                                                    <th>Kelamin</th>
-                                                    <th>No.HP</th>
-                                                    <th>Alamat</th>
-                                                    <th>Kelas</th>
-                                                    <th>Aksi</th>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $siswa->nm_siswa }}</td>
+                                                    <td>{{ $siswa->nis }}</td>
+                                                    <td>{{ $siswa->j_kelamin }}</td>
+                                                    <td>{{ $siswa->no_hp }}</td>
+                                                    <td>{{ $siswa->alamat }}</td>
+                                                    <td>{{ $siswa->kelas->kelas }}</td>
+                                                    <td>
+                                                        <input type="checkbox" name="siswa_ids[]"
+                                                            id="siswa_{{ $siswa->id }}" class="btn-check"
+                                                            value="{{ $siswa->id }}" />
+                                                    </td>
                                                 </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($siswas as $siswa)
-                                                    <tr>
-                                                        <td>{{ $loop->iteration }}</td>
-                                                        <td>{{ $siswa->nm_siswa }}</td>
-                                                        <td>{{ $siswa->nis }}</td>
-                                                        <td>{{ $siswa->j_kelamin }}</td>
-                                                        <td>{{ $siswa->no_hp }}</td>
-                                                        <td>{{ $siswa->alamat }}</td>
-                                                        <td>{{ $siswa->kelas->kelas }}</td>
-                                                        <td>
-                                                            <input type="checkbox" name="siswa_ids[]"
-                                                                id="siswa_{{ $siswa->id }}" class="btn-check"
-                                                                value="{{ $siswa->id }}" />
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </form>
-                            </div>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </form>
+
                         </div>
                     </div>
                 </div>

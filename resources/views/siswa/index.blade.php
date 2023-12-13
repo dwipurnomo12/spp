@@ -61,8 +61,6 @@
                                                             Unduh Format .xlsx
                                                         </a>
 
-
-
                                                         <button type="submit"
                                                             class="btn btn-sm btn-primary">Import</button>
                                                     </div>
@@ -134,6 +132,7 @@
                                             <th>No.HP</th>
                                             <th>Alamat</th>
                                             <th>Kelas</th>
+                                            <th>Angkatan</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -147,6 +146,7 @@
                                                 <td>{{ $siswa->no_hp }}</td>
                                                 <td>{{ $siswa->alamat }}</td>
                                                 <td>{{ $siswa->kelas->kelas }}</td>
+                                                <td>{{ $siswa->thn_angkatan }}</td>
                                                 <td>
                                                     <a href="/siswa/{{ $siswa->id }}/edit"
                                                         class="btn btn-sm btn-warning mb-2 mt-2"><i

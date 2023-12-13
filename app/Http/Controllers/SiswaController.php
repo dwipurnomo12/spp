@@ -58,20 +58,22 @@ class SiswaController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nm_siswa'  => 'required',
-            'nis'       => 'required|unique:siswas',
-            'j_kelamin' => 'required',
-            'alamat'    => 'required',
-            'no_hp'     => 'required',
-            'kelas_id'  => 'required',
+            'nm_siswa'      => 'required',
+            'nis'           => 'required|unique:siswas',
+            'j_kelamin'     => 'required',
+            'alamat'        => 'required',
+            'no_hp'         => 'required',
+            'kelas_id'      => 'required',
+            'thn_angkatan'  => 'required'
         ], [
-            'nm_siswa.required'  => 'Form wajib diisi !',
-            'nis.required'       => 'Form Wajib diisi !',
-            'nis.unique'         => 'Data sudah digunakan !',
-            'j_kelamin.required' => 'Pilih jenis kelamin !',
-            'alamat.required'    => 'Form wajib diisi !',
-            'no_hp.required'     => 'Form wajib diisi !',
-            'kelas_id.required'  => 'Form Wajib diisi !',
+            'nm_siswa.required'     => 'Form wajib diisi !',
+            'nis.required'          => 'Form Wajib diisi !',
+            'nis.unique'            => 'Data sudah digunakan !',
+            'j_kelamin.required'    => 'Pilih jenis kelamin !',
+            'alamat.required'       => 'Form wajib diisi !',
+            'no_hp.required'        => 'Form wajib diisi !',
+            'kelas_id.required'     => 'Form Wajib diisi !',
+            'thn_angkatan.required' => 'Form wajib diisi !'
         ]);
 
         if ($validator->fails()) {
@@ -90,7 +92,8 @@ class SiswaController extends Controller
             'alamat'        => $request->alamat,
             'no_hp'         => $request->no_hp,
             'kelas_id'      => $request->kelas_id,
-            'user_id'       => $user->id
+            'user_id'       => $user->id,
+            'thn_angkatan'  => $request->thn_angkatan
         ]);
 
         return redirect('/siswa')->with('success', 'Berhasil menambahkan data baru');
@@ -116,12 +119,13 @@ class SiswaController extends Controller
     {
         $siswa = Siswa::find($id);
         $validator = Validator::make($request->all(), [
-            'nm_siswa'  => 'required',
-            'nis'       => 'required|unique:siswas,nis,' . $id,
-            'j_kelamin' => 'required',
-            'alamat'    => 'required',
-            'no_hp'     => 'required',
-            'kelas_id'  => 'required'
+            'nm_siswa'      => 'required',
+            'nis'           => 'required|unique:siswas,nis,' . $id,
+            'j_kelamin'     => 'required',
+            'alamat'        => 'required',
+            'no_hp'         => 'required',
+            'kelas_id'      => 'required',
+            'thn_angkatan'  => 'required'
         ], [
             'nm_siswa.required'  => 'Form wajib diisi !',
             'nis.required'       => 'Form Wajib diisi !',
@@ -129,7 +133,8 @@ class SiswaController extends Controller
             'j_kelamin.required' => 'Pilih jenis kelamin !',
             'alamat.required'    => 'Form wajib diisi !',
             'no_hp.required'     => 'Form wajib diisi !',
-            'kelas_id.required'  => 'Form Wajib diisi !'
+            'kelas_id.required'  => 'Form Wajib diisi !',
+            'thn_angkatan'       => 'Form wajib diisi !'
         ]);
 
         if ($validator->fails()) {
@@ -138,20 +143,22 @@ class SiswaController extends Controller
 
         if ($request->nis != $siswa->nis) {
             $siswa->update([
-                'nm_siswa'  => $request->nm_siswa,
-                'nis'       => $request->nis,
-                'j_kelamin' => $request->j_kelamin,
-                'alamat'    => $request->alamat,
-                'no_hp'     => $request->no_hp,
-                'kelas_id'  => $request->kelas_id,
+                'nm_siswa'      => $request->nm_siswa,
+                'nis'           => $request->nis,
+                'j_kelamin'     => $request->j_kelamin,
+                'alamat'        => $request->alamat,
+                'no_hp'         => $request->no_hp,
+                'kelas_id'      => $request->kelas_id,
+                'thn_angkatan'  => $request->thn_angkatan
             ]);
         } else {
             $siswa->update([
-                'nm_siswa'  => $request->nm_siswa,
-                'j_kelamin' => $request->j_kelamin,
-                'alamat'    => $request->alamat,
-                'no_hp'     => $request->no_hp,
-                'kelas_id'  => $request->kelas_id,
+                'nm_siswa'      => $request->nm_siswa,
+                'j_kelamin'     => $request->j_kelamin,
+                'alamat'        => $request->alamat,
+                'no_hp'         => $request->no_hp,
+                'kelas_id'      => $request->kelas_id,
+                'thn_angkatan'  => $request->thn_angkatan
             ]);
         }
 
@@ -164,7 +171,7 @@ class SiswaController extends Controller
     public function destroy(string $id)
     {
         $siswa = Siswa::find($id);
-        $siswa->delete();
+        $siswa->forceDelete();
 
         return redirect()->back()->with('success', 'Berhasil menghapus data');
     }
@@ -192,7 +199,7 @@ class SiswaController extends Controller
         ], [
             'file.required'     => 'Tidak boleh kosong !',
             'file.file'         => 'Harus ber-type file !',
-            'file.mimes'        => 'FOrmat yang di izinkan xlsx, xls'
+            'file.mimes'        => 'Format yang di izinkan xlsx, xls'
         ]);
 
         $file = $request->file('file');

@@ -1,15 +1,18 @@
 <?php
 
-use App\Http\Controllers\BiayaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BiayaController;
 use App\Http\Controllers\KelasController;
-use App\Http\Controllers\KenaikanKelasController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\TagihanController;
+use App\Http\Controllers\KelulusanController;
 use App\Http\Controllers\TahunAjaranController;
+use App\Http\Controllers\DataKelulusanController;
+use App\Http\Controllers\KenaikanKelasController;
+use App\Http\Controllers\TambahTagihanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +45,12 @@ Route::middleware(['auth', 'IsAdmin'])->group(function () {
     Route::get('/kenaikan-kelas/filter-data', [KenaikanKelasController::class, 'getOldData']);
     Route::POST('/kenaikan-kelas/update', [KenaikanKelasController::class, 'update']);
     Route::get('/kenaikan-kelas', [KenaikanKelasController::class, 'index']);
+
+    Route::get('/kelulusan/filter-data', [KelulusanController::class, 'getOldData']);
+    Route::POST('/kelulusan/proses-lulus', [KelulusanController::class, 'prosesLulus'])->name('proses-lulus');
+    Route::get('/kelulusan', [KelulusanController::class, 'index']);
+
+    Route::get('/tambah-tagihan', [TambahTagihanController::class, 'index']);
 });
 
 Route::middleware(['auth', 'IsSiswa'])->group(function () {

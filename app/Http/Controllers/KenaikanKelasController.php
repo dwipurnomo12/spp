@@ -35,12 +35,16 @@ class KenaikanKelasController extends Controller
         $kelasBaru = $request->input('kelas_baru');
         $siswaIds = $request->input('siswa_ids');
 
-        if (is_array($siswaIds) && count($siswaIds) > 0) {
-            Siswa::whereIn('id', $siswaIds)->update(['kelas_id' => $kelasBaru]);
+        if (!empty($kelasBaru)) {
+            if (is_array($siswaIds) && count($siswaIds) > 0) {
+                Siswa::whereIn('id', $siswaIds)->update(['kelas_id' => $kelasBaru]);
 
-            return redirect('/kenaikan-kelas')->with('success', 'Data kelas berhasil diperbarui.');
+                return redirect('/kenaikan-kelas')->with('success', 'Data kelas berhasil diperbarui.');
+            }
+
+            return redirect('/kenaikan-kelas')->with('error', 'Tidak ada siswa yang dipilih untuk diperbarui.');
         }
 
-        return redirect('/kenaikan-kelas')->with('error', 'Tidak ada siswa yang dipilih untuk diperbarui.');
+        return redirect('/kenaikan-kelas')->with('error', 'Silakan pilih kelas tujuan terlebih dahulu.');
     }
 }

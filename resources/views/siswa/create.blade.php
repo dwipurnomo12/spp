@@ -67,6 +67,13 @@
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
+                                        <div class="form-group">
+                                            <label for="text">Tahun Angkatan <span style="color: red">*</span></label>
+                                            <input type="number" class="form-control" name="thn_angkatan">
+                                            @error('thn_angkatan')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">

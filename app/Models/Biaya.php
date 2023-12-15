@@ -9,4 +9,9 @@ class Biaya extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    public function tagihans()
+    {
+        return $this->belongsToMany(Tagihan::class, 'tagihan_biaya');
+    }
 }

@@ -14,4 +14,14 @@ class Kelas extends Model
     {
         return $this->belongsTo(Tingkat::class);
     }
+
+    public function siswas()
+    {
+        return $this->hasMany(Siswa::class);
+    }
+
+    public function tagihans()
+    {
+        return $this->hasMany(Tagihan::class);
+    }
 }

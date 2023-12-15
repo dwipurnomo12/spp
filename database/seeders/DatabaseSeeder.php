@@ -24,9 +24,16 @@ class DatabaseSeeder extends Seeder
             'username'  => 'admin',
             'password'  => bcrypt('1234'),
         ]);
-
         User::create([
             'username'  => '1212321',
+            'password'  => bcrypt('1234'),
+        ]);
+        User::create([
+            'username'  => '9828303',
+            'password'  => bcrypt('1234'),
+        ]);
+        User::create([
+            'username'  => '1768299',
             'password'  => bcrypt('1234'),
         ]);
 
@@ -73,14 +80,39 @@ class DatabaseSeeder extends Seeder
             'kelas_id'      => 1,
             'user_id'       => 2,
         ]);
+        Siswa::create([
+            'nis'           => '9828303',
+            'nm_siswa'      => 'Robert Davis Chaniago',
+            'j_kelamin'     => 'laki-laki',
+            'alamat'        => 'Keduren, Purwodadi',
+            'no_hp'         => '08122932324',
+            'thn_angkatan'  => '2022',
+            'kelas_id'      => 2,
+            'user_id'       => 3,
+        ]);
+        Siswa::create([
+            'nis'           => '1768299',
+            'nm_siswa'      => 'Mujiyono',
+            'j_kelamin'     => 'laki-laki',
+            'alamat'        => 'Sumber rejo, Banyuurip',
+            'no_hp'         => '08122932994',
+            'thn_angkatan'  => '2022',
+            'kelas_id'      => 3,
+            'user_id'       => 4,
+        ]);
+
 
         TahunAjaran::create([
             'thn_ajaran'    => '2022/2024'
         ]);
 
         Biaya::create([
-            'jenis_pembayaran'  => 'SPP',
+            'jenis_pembayaran'  => 'SPP 1',
             'biaya'             => '150000'
+        ]);
+        Biaya::create([
+            'jenis_pembayaran'  => 'Sumbangan',
+            'biaya'             => '50000'
         ]);
 
         Tingkat::create([

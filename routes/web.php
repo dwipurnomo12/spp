@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BiayaController;
+use App\Http\Controllers\CekTagihanController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SiswaController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\DataKelulusanController;
 use App\Http\Controllers\KenaikanKelasController;
 use App\Http\Controllers\TambahTagihanController;
+use App\Http\Controllers\TransaksiPembayaranController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,9 +52,15 @@ Route::middleware(['auth', 'IsAdmin'])->group(function () {
     Route::POST('/kelulusan/proses-lulus', [KelulusanController::class, 'prosesLulus'])->name('proses-lulus');
     Route::get('/kelulusan', [KelulusanController::class, 'index']);
 
+    Route::get('/tagihan', [TagihanController::class, 'index']);
+    Route::get('/tagihan/detail/{id}', [TagihanController::class, 'detail']);
+
     Route::get('/tambah-tagihan', [TambahTagihanController::class, 'index']);
+    Route::POST('/tambah-tagihan', [TambahTagihanController::class, 'tambahTagihan']);
+
+    Route::get('/transaksi', [TransaksiPembayaranController::class, 'index']);
 });
 
 Route::middleware(['auth', 'IsSiswa'])->group(function () {
-    Route::get('/tagihan', [TagihanController::class, 'index']);
+    Route::get('/cek-tagihan', [CekTagihanController::class, 'index']);
 });

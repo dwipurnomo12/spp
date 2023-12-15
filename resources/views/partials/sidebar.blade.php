@@ -122,12 +122,36 @@
                     <h4 class="text-section">Pembayaran</h4>
                 </li>
                 <li class="nav-item">
+                    <a href="/transaksi">
+                        <i class="fa fa-solid fa-coins"></i>
+                        <p>Transaksi</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/tagihan">
+                        <i class="fa fa-solid fa-coins"></i>
+                        <p>Data Tagihan</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="/tambah-tagihan">
                         <i class="fa fa-solid fa-money-bill-wave"></i>
                         <p>Tambah Tagihan</p>
                     </a>
                 </li>
             @else
+                <li class="nav-section">
+                    <span class="sidebar-mini-icon">
+                        <i class="fa fa-ellipsis-h"></i>
+                    </span>
+                    <h4 class="text-section">Pembayaran</h4>
+                </li>
+                <li class="nav-item">
+                    <a href="/cek-tagihan">
+                        <i class="fa fa-solid fa-coins"></i>
+                        <p>Cek Tagihan</p>
+                    </a>
+                </li>
             @endif
 
         </ul>

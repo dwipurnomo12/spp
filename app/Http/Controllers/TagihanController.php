@@ -10,16 +10,16 @@ class TagihanController extends Controller
 {
     public function index()
     {
+        $tagihans = Tagihan::with('biayas')->orderBy('id', 'DESC')->get();
         return view('tagihan.index', [
-            'tagihans'  => Tagihan::orderBy('id', 'DESC')->get()
+            'tagihans'  => $tagihans
         ]);
     }
 
-    public function detail()
+    public function destroy(String $id)
     {
-        $tagihan = Tagihan::with(['biayas', 'kelases', 'siswas'])->orderBy('id', 'DESC')->first();
-        return view('tagihan.detail', [
-            'tagihan' => $tagihan
-        ]);
+        $tagihan = Tagihan::find($id);
+        $tagihan->delete();
+        return redirect()->back()->with('success', 'Data berhasil dihapus !');
     }
 }

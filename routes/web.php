@@ -53,12 +53,16 @@ Route::middleware(['auth', 'IsAdmin'])->group(function () {
     Route::get('/kelulusan', [KelulusanController::class, 'index']);
 
     Route::get('/tagihan', [TagihanController::class, 'index']);
-    Route::get('/tagihan/detail/{id}', [TagihanController::class, 'detail']);
+    Route::delete('/tagihan/{id}', [TagihanController::class, 'destroy']);
 
     Route::get('/tambah-tagihan', [TambahTagihanController::class, 'index']);
     Route::POST('/tambah-tagihan', [TambahTagihanController::class, 'tambahTagihan']);
 
+    Route::get('/transaksi/filter-data', [TransaksiPembayaranController::class, 'filterData']);
     Route::get('/transaksi', [TransaksiPembayaranController::class, 'index']);
+    Route::get('/transaksi/detail/{id}', [TransaksiPembayaranController::class, 'detail']);
+    Route::post('/transaksi/bayar', [TransaksiPembayaranController::class, 'bayar']);
+    Route::get('/transaksi/cetak-struk/{siswaId}/{tagihanId}', [TransaksiPembayaranController::class, 'cetakStruk']);
 });
 
 Route::middleware(['auth', 'IsSiswa'])->group(function () {

@@ -42,8 +42,8 @@ class TambahTagihanController extends Controller
             ]);
 
             foreach ($siswas as $siswa) {
-                $totalBiaya = $tagihan->biayas()->sum('biayas.biaya'); // ganti 'biaya' dengan nama kolom yang benar
-                $siswa->tagihans()->updateExistingPivot($tagihan->id, [
+                $totalBiaya = $tagihan->biayas()->sum('biaya'); // Sesuaikan dengan nama kolom yang benar
+                $tagihan->siswas()->updateExistingPivot($siswa->id, [
                     'total_tagihan' => $totalBiaya,
                 ]);
             }

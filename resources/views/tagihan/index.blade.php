@@ -32,53 +32,9 @@
                                 <div class="col-md-6">
                                     <h4 class="card-title">Tagihan</h4>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="modal fade" id="importDataSiswa" tabindex="-1" role="dialog"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Import Data Siswa</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <form action="{{ route('siswa.import') }}" method="post"
-                                                    enctype="multipart/form-data">
-                                                    <div class="modal-body">
-                                                        @csrf
-                                                        <div class="form-group">
-                                                            <label for="file">Pilih file Excel</label>
-                                                            <input type="file" name="file" class="form-control"
-                                                                accept=".xlsx, .xls">
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <a href="{{ route('download-excel', ['filename' => 'format_excel.xlsx']) }}"
-                                                            class="btn btn-sm btn-success float-start"
-                                                            download="format_excel.xlsx">
-                                                            Unduh Format .xlsx
-                                                        </a>
-
-                                                        <button type="submit"
-                                                            class="btn btn-sm btn-primary">Import</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="clearfix">
-                                        <button type="button" class="btn btn-sm btn-success float-right"
-                                            data-toggle="modal" data-target="#importDataSiswa">
-                                            <i class="fas fa-regular fa-file-import"></i> Import Data Siswa
-                                        </button>
-                                        <a href="/siswa/create" class="btn btn-sm btn-primary mb-2 float-right mr-2">
-                                            <i class="fa fa-plus"></i> Tambah Siswa
-                                        </a>
-                                    </div>
-
+                                <div class="col-6 text-right">
+                                    <a href="/tambah-tagihan" type="button" class="btn btn-sm btn-primary float-end">Tambah
+                                        Tagihan</a>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +45,8 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama Tagihan</th>
-                                            <th>Detail</th>
+                                            <th>Rincian</th>
+                                            <th>Opsi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -98,8 +55,26 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $tagihan->nm_tagihan }}</td>
                                                 <td>
-                                                    <a href="/tagihan/detail/{{ $tagihan->id }}"
-                                                        class="btn btn-sm btn-primary">Detail</a>
+                                                    @foreach ($tagihan->biayas as $biaya)
+                                                        <ul>
+                                                            <li>
+                                                                Rp.
+                                                                {{ number_format($biaya->biaya, 2, ',', '.') }}
+                                                                ({{ $biaya->jenis_pembayaran }})
+                                                            </li>
+                                                        </ul>
+                                                    @endforeach
+                                                </td>
+                                                <td>
+                                                    <form id="{{ $tagihan->id }}" action="/tagihan/{{ $tagihan->id }}"
+                                                        method="POST" class="d-inline">
+                                                        @method('delete')
+                                                        @csrf
+                                                        <button type="button"
+                                                            class="btn btn-sm btn-danger swal-confirm mb-2"
+                                                            data-form="{{ $tagihan->id }}"><i
+                                                                class="fa fa-trash"></i></button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         @endforeach

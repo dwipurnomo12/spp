@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use App\Models\Role;
+use App\Models\User;
 use App\Models\Kelas;
+use App\Models\Tagihan;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 
 class Siswa extends Model
@@ -34,8 +36,9 @@ class Siswa extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function siswas()
+    public function tagihans()
     {
-        return $this->hasMany(Siswa::class);
+        return $this->belongsToMany(Tagihan::class, 'siswa_tagihan')
+            ->withPivot('status', 'total_tagihan');
     }
 }

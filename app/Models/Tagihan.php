@@ -22,6 +22,7 @@ class Tagihan extends Model
 
     public function siswas()
     {
-        return $this->belongsToMany(Siswa::class, 'siswa_tagihan');
+        return $this->belongsToMany(Siswa::class, 'siswa_tagihan')
+            ->withPivot('status', 'total_tagihan');
     }
 }

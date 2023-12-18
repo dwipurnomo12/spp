@@ -27,6 +27,12 @@
                         <i class="flaticon-right-arrow"></i>
                     </li>
                     <li class="nav-item">
+                        <a href="/tagihan">Tagihan</a>
+                    </li>
+                    <li class="separator">
+                        <i class="flaticon-right-arrow"></i>
+                    </li>
+                    <li class="nav-item">
                         <a href="/tambah-tagihan">Tambah Tagihan</a>
                     </li>
                 </ul>
@@ -51,7 +57,7 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="text">Nama Tagihan <span style="color: red">*</span></label>
-                                    <input type="text" class="form-control" name="nm_tagihan">
+                                    <input type="text" class="form-control" name="nm_tagihan" required>
                                     @error('nm_tagihan')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
@@ -63,7 +69,8 @@
                                         @foreach ($biayas as $biaya)
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" name="biaya_id[]" value="{{ $biaya->id }}">
+                                                    <input type="checkbox" name="biaya_id[]" value="{{ $biaya->id }}"
+                                                        required>
                                                     Rp. {{ number_format($biaya->biaya, 2, ',', '.') }}
                                                 </label>
                                             </div>
@@ -76,14 +83,16 @@
                                         @foreach ($kelases as $kelas)
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" name="kelas_id[]" value="{{ $kelas->id }}">
+                                                    <input type="checkbox" name="kelas_id[]" value="{{ $kelas->id }}"
+                                                        required>
                                                     {{ $kelas->kelas }}
                                                 </label>
                                             </div>
                                         @endforeach
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-success">Tambah Tagihan</button>
+                                <button type="submit" class="btn btn-sm btn-success float-right my-3"><i
+                                        class="fa fa-solid fa-money-bill-wave"></i> Tambah Tagihan</button>
                             </form>
                         </div>
                     </div>

@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Admin;
 use App\Models\Biaya;
 use App\Models\Kelas;
+use App\Models\Saldo;
 use App\Models\Siswa;
 use App\Models\Tingkat;
 use App\Models\TahunAjaran;
@@ -123,6 +124,10 @@ class DatabaseSeeder extends Seeder
         ]);
         Tingkat::create([
             'tingkat'   => 'XII'
+        ]);
+
+        Saldo::create([
+            'saldo' => 0.00
         ]);
     }
 }

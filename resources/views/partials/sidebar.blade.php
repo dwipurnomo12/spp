@@ -119,6 +119,25 @@
                     <span class="sidebar-mini-icon">
                         <i class="fa fa-ellipsis-h"></i>
                     </span>
+                    <h4 class="text-section">Saldo</h4>
+                </li>
+                <li class="nav-item">
+                    <a href="/saldo">
+                        <i class="fa fa-solid fa-money-bill-trend-up"></i>
+                        <p>Saldo Saat Ini</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/pengeluaran">
+                        <i class="fa fa-solid fa-arrow-right-from-bracket"></i>
+                        <p>Pengeluaran</p>
+                    </a>
+                </li>
+
+                <li class="nav-section">
+                    <span class="sidebar-mini-icon">
+                        <i class="fa fa-ellipsis-h"></i>
+                    </span>
                     <h4 class="text-section">Tagihan</h4>
                 </li>
                 <li class="nav-item">

@@ -69,8 +69,7 @@
                                         @foreach ($biayas as $biaya)
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" name="biaya_id[]" value="{{ $biaya->id }}"
-                                                        required>
+                                                    <input type="checkbox" name="biaya_id[]" value="{{ $biaya->id }}">
                                                     Rp. {{ number_format($biaya->biaya, 2, ',', '.') }}
                                                 </label>
                                             </div>
@@ -83,8 +82,7 @@
                                         @foreach ($kelases as $kelas)
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" name="kelas_id[]" value="{{ $kelas->id }}"
-                                                        required>
+                                                    <input type="checkbox" name="kelas_id[]" value="{{ $kelas->id }}">
                                                     {{ $kelas->kelas }}
                                                 </label>
                                             </div>

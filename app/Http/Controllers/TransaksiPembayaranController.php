@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kelas;
+use App\Models\Saldo;
 use App\Models\Siswa;
 use App\Models\Tagihan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\SaldoHistory;
 use Barryvdh\DomPDF\Facade\pdf as PDF;
 
 class TransaksiPembayaranController extends Controller
@@ -54,11 +56,27 @@ class TransaksiPembayaranController extends Controller
         $tagihanId = $request->input('tagihan_id');
 
         $siswa      = Siswa::find($siswaId);
-        $tagihan    = Tagihan::find($tagihanId);
+        $tagihan    = Tagihan::with(['siswas' => function ($query) use ($siswa) {
+            $query->where('siswa_id', $siswa->id);
+        }])->find($tagihanId);
 
         if (!$siswa || !$tagihan) {
             return response()->json(['error' => 'Siswa atau tagihan tidak ditemukan'], 404);
         }
+
+        $nominal = $tagihan->siswas->first()->pivot->total_tagihan;
+
+        $saldo = Saldo::first();
+        $saldo->saldo += $nominal;
+        $saldo->save();
+
+        $saldoHistory = new SaldoHistory([
+            'saldo_id'      => $saldo->id,
+            'nominal'       => $nominal,
+            'keterangan'    => 'Pembayaran tagihan sekolah oleh admin untuk siswa ' . $siswa->nm_siswa,
+            'status'        => 'in'
+        ]);
+        $saldoHistory->save();
 
         $siswa->tagihans()->updateExistingPivot($tagihanId, [
             'status'    => 'lunas'

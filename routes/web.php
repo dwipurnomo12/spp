@@ -13,6 +13,8 @@ use App\Http\Controllers\KelulusanController;
 use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\DataKelulusanController;
 use App\Http\Controllers\KenaikanKelasController;
+use App\Http\Controllers\PengeluaranController;
+use App\Http\Controllers\SaldoController;
 use App\Http\Controllers\TambahTagihanController;
 use App\Http\Controllers\TransaksiPembayaranController;
 
@@ -51,6 +53,9 @@ Route::middleware(['auth', 'IsAdmin'])->group(function () {
     Route::get('/kelulusan/filter-data', [KelulusanController::class, 'getOldData']);
     Route::POST('/kelulusan/proses-lulus', [KelulusanController::class, 'prosesLulus'])->name('proses-lulus');
     Route::get('/kelulusan', [KelulusanController::class, 'index']);
+
+    Route::get('/saldo', [SaldoController::class, 'index']);
+    Route::resource('/pengeluaran', PengeluaranController::class);
 
     Route::get('/tagihan', [TagihanController::class, 'index']);
     Route::delete('/tagihan/{id}', [TagihanController::class, 'destroy']);

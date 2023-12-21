@@ -31,7 +31,7 @@
             </div>
         </div>
         <ul class="nav nav-primary">
-            <li class="nav-item active">
+            <li class="nav-item {{ Request::is('home*') ? 'active' : '' }}">
                 <a href="/home">
                     <i class="fas fa-home"></i>
                     <p>Dashboard</p>
@@ -44,7 +44,7 @@
                     </span>
                     <h4 class="text-section">Data Master</h4>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ Request::is('siswa*', 'kelas*', 'tahun-ajaran*') ? 'active' : '' }}">
                     <a data-toggle="collapse" href="#base">
                         <i class="fas fa-layer-group"></i>
                         <p>Data Siswa</p>
@@ -71,21 +71,13 @@
                         </ul>
                     </div>
 
-                    <a data-toggle="collapse" href="#pembayaran">
+                <li class="nav-item {{ Request::is('biaya*') ? 'active' : '' }}">
+                    <a href="/biaya">
                         <i class="fas fa-regular fa-money-bill-1"></i>
-                        <p>Data Pembayaran</p>
-                        <span class="caret"></span>
+                        <p>Biaya</p>
                     </a>
-                    <div class="collapse" id="pembayaran">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="/biaya">
-                                    <span class="sub-item">Biaya</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </li>
+
 
                 <li class="nav-section">
                     <span class="sidebar-mini-icon">
@@ -93,7 +85,7 @@
                     </span>
                     <h4 class="text-section">Pembaharuan Data</h4>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ Request::is('kenaikan-kelas*', 'kelulusan*') ? 'active' : '' }}">
                     <a data-toggle="collapse" href="#pembaharuan">
                         <i class="fas fa-regular fa-pen-to-square"></i>
                         <p>Data Siswa</p>
@@ -121,13 +113,13 @@
                     </span>
                     <h4 class="text-section">Saldo</h4>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ Request::is('saldo*') ? 'active' : '' }}">
                     <a href="/saldo">
                         <i class="fa fa-solid fa-money-bill-trend-up"></i>
                         <p>Saldo Saat Ini</p>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ Request::is('pengeluaran*') ? 'active' : '' }}">
                     <a href="/pengeluaran">
                         <i class="fa fa-solid fa-arrow-right-from-bracket"></i>
                         <p>Pengeluaran</p>
@@ -140,13 +132,13 @@
                     </span>
                     <h4 class="text-section">Tagihan</h4>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ Request::is('tagihan*') ? 'active' : '' }}">
                     <a href="/tagihan">
                         <i class="fa fa-solid fa-coins"></i>
                         <p>Data Tagihan</p>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ Request::is('tambah-tagihan*') ? 'active' : '' }}">
                     <a href="/tambah-tagihan">
                         <i class="fa fa-solid fa-money-bill-wave"></i>
                         <p>Tambah Tagihan</p>
@@ -157,9 +149,43 @@
                     <span class="sidebar-mini-icon">
                         <i class="fa fa-ellipsis-h"></i>
                     </span>
+                    <h4 class="text-section">Tabungan</h4>
+                </li>
+                <li class="nav-item {{ Request::is('setor-tunai*', 'pencairan*') ? 'active' : '' }}">
+                    <a data-toggle="collapse" href="#tabungan">
+                        <i class="fa fa-solid fa-wallet"></i>
+                        <p>Tabungan Siswa</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="tabungan">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="/tabungan-siswa">
+                                    <span class="sub-item">Tabungan Siswa</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/setor-tunai">
+                                    <span class="sub-item">Setor Tunai</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/pencairan">
+                                    <span class="sub-item">Pencairan</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+
+                <li class="nav-section">
+                    <span class="sidebar-mini-icon">
+                        <i class="fa fa-ellipsis-h"></i>
+                    </span>
                     <h4 class="text-section">Pembayaran</h4>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ Request::is('transaksi*') ? 'active' : '' }}">
                     <a href="/transaksi">
                         <i class="fa fa-solid fa-money-bill-transfer"></i>
                         <p>Transaksi</p>
@@ -172,7 +198,7 @@
                     </span>
                     <h4 class="text-section">Pembayaran</h4>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ Request::is('cek-tagihan*') ? 'active' : '' }}">
                     <a href="/cek-tagihan">
                         <i class="fa fa-solid fa-coins"></i>
                         <p>Cek Tagihan</p>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Saldo;
+use Barryvdh\DomPDF\Facade\pdf as PDF;
 use App\Models\SaldoHistory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -82,5 +83,19 @@ class PengeluaranController extends Controller
         $saldo->save();
 
         return redirect()->back()->with('success', 'Data berhasil dihapus dan saldo dikembalikan!');
+    }
+
+    /**
+     * Print data.
+     */
+    public function cetakBuktiPengeluaran($id)
+    {
+        $pengeluaran = SaldoHistory::find($id);
+
+        $pdf = PDF::loadView('pengeluaran.bukti-pengeluaran', [
+            'pengeluaran'   => $pengeluaran
+        ]);
+
+        return $pdf->download('bukti-pengeluaran.pdf');
     }
 }

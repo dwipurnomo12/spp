@@ -84,6 +84,7 @@
                                                     <th>Nominal</th>
                                                     <th>Aliran Dana</th>
                                                     <th>Keterangan</th>
+                                                    <th>Waktu</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -93,6 +94,7 @@
                                                         <td>Rp. {{ number_format($history->nominal, 2) }}</td>
                                                         <td>{{ $history->status }}</td>
                                                         <td>{{ $history->keterangan }}</td>
+                                                        <td>{{ $history->created_at }}</td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>

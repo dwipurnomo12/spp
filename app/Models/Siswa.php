@@ -41,4 +41,9 @@ class Siswa extends Model
         return $this->belongsToMany(Tagihan::class, 'siswa_tagihan')
             ->withPivot('status', 'total_tagihan');
     }
+
+    public function tabungan()
+    {
+        return $this->hasOne(Tabungan::class);
+    }
 }

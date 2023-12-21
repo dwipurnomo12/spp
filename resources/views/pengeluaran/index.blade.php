@@ -50,6 +50,7 @@
                                                     <th>Nominal</th>
                                                     <th>Aliran Dana</th>
                                                     <th>Keterangan</th>
+                                                    <th>Waktu</th>
                                                     <th>Opsi</th>
                                                 </tr>
                                             </thead>
@@ -60,6 +61,7 @@
                                                         <td>Rp. {{ number_format($history->nominal, 2) }}</td>
                                                         <td>{{ $history->status }}</td>
                                                         <td>{{ $history->keterangan }}</td>
+                                                        <td>{{ $history->created_at }}</td>
                                                         <td>
                                                             <form id="{{ $history->id }}"
                                                                 action="/pengeluaran/{{ $history->id }}" method="POST"
@@ -71,7 +73,9 @@
                                                                     data-form="{{ $history->id }}"><i
                                                                         class="fa fa-trash"></i> Batalkan</button>
 
-                                                            </form><a href="#" class="btn btn-sm btn-success">
+                                                            </form>
+                                                            <a href="/pengeluaran/buktu-pengeluaran/{{ $history->id }}"
+                                                                class="btn btn-sm btn-success">
                                                                 <i class="fa fa-reguler fa-file-pdf"></i>
                                                                 Print
                                                             </a>

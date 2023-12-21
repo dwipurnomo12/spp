@@ -151,6 +151,24 @@
 
     <!-- Atlantis JS -->
     <script src="/assets/js/atlantis.min.js"></script>
+
+    <!-- active link sidebar -->
+    <script>
+        $(document).ready(function() {
+            // Mendapatkan path URL saat ini
+            var currentPath = window.location.pathname;
+
+            // Menambahkan kelas 'active' pada link yang sesuai dengan path URL
+            $('.nav-item a').filter(function() {
+                return $(this).attr('href') === currentPath;
+            }).addClass('active');
+
+            // Menambahkan kelas 'active' pada sub-item yang sesuai dengan path URL
+            $('.nav-collapse a').filter(function() {
+                return $(this).attr('href') === currentPath;
+            }).parents('.nav-collapse').prev('a').addClass('active');
+        });
+    </script>
 </body>
 
 </html>

@@ -56,6 +56,7 @@ Route::middleware(['auth', 'IsAdmin'])->group(function () {
 
     Route::get('/saldo', [SaldoController::class, 'index']);
     Route::resource('/pengeluaran', PengeluaranController::class);
+    Route::get('/pengeluaran/buktu-pengeluaran/{id}', [PengeluaranController::class, 'cetakBuktiPengeluaran']);
 
     Route::get('/tagihan', [TagihanController::class, 'index']);
     Route::delete('/tagihan/{id}', [TagihanController::class, 'destroy']);

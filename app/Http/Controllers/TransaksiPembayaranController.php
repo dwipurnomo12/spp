@@ -85,13 +85,12 @@ class TransaksiPembayaranController extends Controller
         return response()->json(['success' => true]);
     }
 
-    public function cetakStruk($siswa_id, $tagihan_id)
+    public function cetakStruk($siswaId, $tagihanId)
     {
-        $siswa = Siswa::find($siswa_id);
-        $tagihan = Tagihan::with(['siswas' => function ($query) use ($siswa, $tagihan_id) {
-            $query->where('siswa_id', $siswa->id)->where('tagihan_id', $tagihan_id);
-        }])
-            ->first();
+        $siswa = Siswa::find($siswaId);
+        $tagihan    = Tagihan::with(['siswas' => function ($query) use ($siswa) {
+            $query->where('siswa_id', $siswa->id);
+        }])->find($tagihanId);
 
         if (!$siswa || !$tagihan) {
             return response()->json(['error' => 'Siswa atau tagihan tidak ditemukan'], 404);

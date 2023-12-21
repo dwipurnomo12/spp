@@ -177,12 +177,10 @@
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
-                        // Anda bisa menambahkan header lain jika diperlukan
                     },
                 })
                 .then(response => response.json())
                 .then(data => {
-                    // Lakukan sesuatu setelah mendapatkan respons, misalnya menangani file PDF
                     console.log(data);
                 })
                 .catch(error => {

@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tabungans', function (Blueprint $table) {
+        Schema::create('tabungan_histories', function (Blueprint $table) {
             $table->id();
-            $table->decimal('tabungan', 10, 2)->default(0.00);
-            $table->unsignedBigInteger('siswa_id');
-            $table->foreign('siswa_id')->references('id')->on('siswas')->onDelete('cascade');
+            $table->unsignedBigInteger('tabungan_id');
+            $table->decimal('nominal', 10, 2);
+            $table->enum('status', ['setor', 'penarikan']);
+            $table->foreign('tabungan_id')->references('id')->on('tabungans')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tabungans');
+        Schema::dropIfExists('tabungan_histories');
     }
 };

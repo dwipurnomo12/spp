@@ -13,8 +13,11 @@ use App\Http\Controllers\KelulusanController;
 use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\DataKelulusanController;
 use App\Http\Controllers\KenaikanKelasController;
+use App\Http\Controllers\PenarikanController;
 use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\SaldoController;
+use App\Http\Controllers\SetorTunaiController;
+use App\Http\Controllers\TabunganSiswaController;
 use App\Http\Controllers\TambahTagihanController;
 use App\Http\Controllers\TransaksiPembayaranController;
 
@@ -54,9 +57,23 @@ Route::middleware(['auth', 'IsAdmin'])->group(function () {
     Route::POST('/kelulusan/proses-lulus', [KelulusanController::class, 'prosesLulus'])->name('proses-lulus');
     Route::get('/kelulusan', [KelulusanController::class, 'index']);
 
+    Route::get('/tabungan-siswa/filter-data', [TabunganSiswaController::class, 'filterData']);
+    Route::get('/tabungan-siswa', [TabunganSiswaController::class, 'index']);
+    Route::get('/tabungan-siswa/history/{id}', [TabunganSiswaController::class, 'history']);
+
+    Route::get('/setor-tunai/get-data/{siswa_id}', [SetorTunaiController::class, 'getDataSiswa']);
+    Route::get('/setor-tunai', [SetorTunaiController::class, 'index']);
+    Route::post('/setor-tunai', [SetorTunaiController::class, 'store']);
+    Route::get('/setor-tunai/bukti-setoran/{id}', [SetorTunaiController::class, 'cetakBuktiSetoran']);
+
+    Route::get('/penarikan/get-data/{siswa_id}', [PenarikanController::class, 'getDataSiswa']);
+    Route::get('/penarikan', [PenarikanController::class, 'index']);
+    Route::post('/penarikan', [PenarikanController::class, 'store']);
+    Route::get('/penarikan/bukti-penarikan/{id}', [PenarikanController::class, 'cetakBuktiPenarikan']);
+
     Route::get('/saldo', [SaldoController::class, 'index']);
     Route::resource('/pengeluaran', PengeluaranController::class);
-    Route::get('/pengeluaran/buktu-pengeluaran/{id}', [PengeluaranController::class, 'cetakBuktiPengeluaran']);
+    Route::get('/pengeluaran/bukti-pengeluaran/{id}', [PengeluaranController::class, 'cetakBuktiPengeluaran']);
 
     Route::get('/tagihan', [TagihanController::class, 'index']);
     Route::delete('/tagihan/{id}', [TagihanController::class, 'destroy']);

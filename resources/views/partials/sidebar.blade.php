@@ -170,8 +170,8 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/pencairan">
-                                    <span class="sub-item">Pencairan</span>
+                                <a href="/penarikan">
+                                    <span class="sub-item">Penarikan / Pencairan</span>
                                 </a>
                             </li>
                         </ul>

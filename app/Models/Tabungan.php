@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Siswa;
+use App\Models\TabunganHistory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Tabungan extends Model
 {
@@ -13,5 +15,10 @@ class Tabungan extends Model
     public function siswa()
     {
         return $this->belongsTo(Siswa::class);
+    }
+
+    public function tabunganHistories()
+    {
+        return $this->hasMany(TabunganHistory::class);
     }
 }

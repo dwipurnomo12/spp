@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Kelas;
 use App\Models\Siswa;
+use App\Models\Tabungan;
 use App\Imports\SiswaImport;
 use Illuminate\Http\Request;
 use App\Exports\SiswasExport;
@@ -83,6 +84,11 @@ class SiswaController extends Controller
         $user = User::create([
             'username'      => $request->nis,
             'password'      => bcrypt('1234'),
+        ]);
+
+        $tabungan = Tabungan::create([
+            'tabungan'  => 0.00,
+            'siswa_id'  => $user->id,
         ]);
 
         Siswa::create([

@@ -11,6 +11,7 @@ use App\Models\Kelas;
 use App\Models\Saldo;
 use App\Models\Siswa;
 use App\Models\Tingkat;
+use App\Models\Tabungan;
 use App\Models\TahunAjaran;
 use Illuminate\Database\Seeder;
 
@@ -100,6 +101,19 @@ class DatabaseSeeder extends Seeder
             'thn_angkatan'  => '2022',
             'kelas_id'      => 3,
             'user_id'       => 4,
+        ]);
+
+        Tabungan::create([
+            'tabungan'  => 0.00,
+            'siswa_id'  => 1
+        ]);
+        Tabungan::create([
+            'tabungan'  => 0.00,
+            'siswa_id'  => 2
+        ]);
+        Tabungan::create([
+            'tabungan'  => 0.00,
+            'siswa_id'  => 3
         ]);
 
 

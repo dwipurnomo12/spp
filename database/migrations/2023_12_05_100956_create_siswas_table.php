@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('no_hp');
             $table->bigInteger('thn_angkatan');
             $table->foreignId('kelas_id');
-            $table->foreignId('user_id')->constrained();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -36,90 +36,74 @@
                             </div>
                         </div>
                         <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="table_id" class="display table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Jenis Tagihan</th>
+                                            <th>Status</th>
+                                            <th>Rincian</th>
+                                            <th>Tagihan</th>
+                                            <th>Opsi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-                            <div class="row mt-4">
-                                <div class="col">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            Tagihan Siswa Yang Belum Dibayar
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="table-responsive">
-                                                <table id="table_id" class="display table table-striped table-hover">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>#</th>
-                                                            <th>Jenis Tagihan</th>
-                                                            <th>Status</th>
-                                                            <th>Rincian</th>
-                                                            <th>Tagihan</th>
-                                                            <th>Opsi</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-
-                                                        <?php $no = 1; ?>
-                                                        @foreach ($tagihans as $tagihan)
-                                                            @foreach ($tagihan->siswas as $siswa)
-                                                                <tr>
-                                                                    <td>{{ $no++ }}</td>
-                                                                    <td>{{ $tagihan->nm_tagihan }}</td>
-                                                                    <td>
-                                                                        @if ($siswa->pivot->status == 'belum_dibayar')
-                                                                            <span
-                                                                                class="badge badge-warning">{{ $siswa->pivot->status }}
-                                                                            </span>
-                                                                        @else
-                                                                            <span
-                                                                                class="badge badge-success">{{ $siswa->pivot->status }}
-                                                                            </span>
-                                                                        @endif
-                                                                    </td>
-                                                                    <td>
-                                                                        @foreach ($tagihan->biayas as $biaya)
-                                                                            <ul>
-                                                                                <li>
-                                                                                    Rp.
-                                                                                    {{ number_format($biaya->biaya, 2, ',', '.') }}
-                                                                                    ({{ $biaya->jenis_pembayaran }})
-                                                                                </li>
-                                                                            </ul>
-                                                                        @endforeach
-                                                                    </td>
-
-                                                                    <td>Rp.
-                                                                        {{ number_format($siswa->pivot->total_tagihan, 2, ',', '.') }}
-                                                                    </td>
-                                                                    <td>
-                                                                        @if ($siswa->pivot->status == 'belum_dibayar')
-                                                                            <a href="javascript:void(0)"
-                                                                                onclick="konfirmasiPembayaran('{{ $siswa->id }}', '{{ $tagihan->id }}')"
-                                                                                class="btn btn-sm btn-success">
-                                                                                <i
-                                                                                    class="fa fa-solid fa-money-bill-wave"></i>
-                                                                                Bayar
-                                                                            </a>
-                                                                        @else
-                                                                            <a href="javascript:void(0)"
-                                                                                onclick="cetakStruk('{{ $siswa->id }}', '{{ $tagihan->id }}')"
-                                                                                class="btn btn-sm btn-danger">
-                                                                                <i class="fa fa-reguler fa-file-pdf"></i>
-                                                                                Struk
-                                                                            </a>
-                                                                        @endif
-                                                                    </td>
-                                                                </tr>
-                                                            @endforeach
+                                        <?php $no = 1; ?>
+                                        @foreach ($tagihans as $tagihan)
+                                            @foreach ($tagihan->users as $user)
+                                                <tr>
+                                                    <td>{{ $no++ }}</td>
+                                                    <td>{{ $tagihan->nm_tagihan }}</td>
+                                                    <td>
+                                                        @if ($user->pivot->status == 'belum_dibayar')
+                                                            <span class="badge badge-warning">{{ $user->pivot->status }}
+                                                            </span>
+                                                        @else
+                                                            <span class="badge badge-success">{{ $user->pivot->status }}
+                                                            </span>
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        @foreach ($tagihan->biayas as $biaya)
+                                                            <ul>
+                                                                <li>
+                                                                    Rp.
+                                                                    {{ number_format($biaya->biaya, 2, ',', '.') }}
+                                                                    ({{ $biaya->jenis_pembayaran }})
+                                                                </li>
+                                                            </ul>
                                                         @endforeach
+                                                    </td>
+
+                                                    <td>Rp.
+                                                        {{ number_format($user->pivot->total_tagihan, 2, ',', '.') }}
+                                                    </td>
+                                                    <td>
+                                                        @if ($user->pivot->status == 'belum_dibayar')
+                                                            <a href="javascript:void(0)"
+                                                                onclick="konfirmasiPembayaran('{{ $user->id }}', '{{ $tagihan->id }}')"
+                                                                class="btn btn-sm btn-success">
+                                                                <i class="fa fa-solid fa-money-bill-wave"></i>
+                                                                Bayar
+                                                            </a>
+                                                        @else
+                                                            <a href="javascript:void(0)"
+                                                                onclick="cetakStruk('{{ $user->id }}', '{{ $tagihan->id }}')"
+                                                                class="btn btn-sm btn-danger">
+                                                                <i class="fa fa-reguler fa-file-pdf"></i>
+                                                                Struk
+                                                            </a>
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endforeach
 
 
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -137,7 +121,7 @@
     </script>
 
     <script>
-        function konfirmasiPembayaran(siswaId, tagihanId) {
+        function konfirmasiPembayaran(userId, tagihanId) {
             Swal.fire({
                 title: 'Konfirmasi Pembayaran',
                 text: 'Anda yakin ingin melakukan pembayaran?',
@@ -151,7 +135,7 @@
                         url: '/transaksi/bayar',
                         type: 'POST',
                         data: {
-                            siswa_id: siswaId,
+                            user_id: userId,
                             tagihan_id: tagihanId,
                             _token: '{{ csrf_token() }}',
                         },
@@ -171,8 +155,8 @@
     </script>
 
     <script>
-        function cetakStruk(siswaId, tagihanId) {
-            fetch('/transaksi/cetak-struk/' + siswaId + '/' + tagihanId, {
+        function cetakStruk(userId, tagihanId) {
+            fetch('/transaksi/cetak-struk/' + userId + '/' + tagihanId, {
                     method: 'GET',
                     headers: {
                         'Accept': 'application/json',

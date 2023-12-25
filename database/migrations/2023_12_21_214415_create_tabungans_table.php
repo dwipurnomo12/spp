@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('tabungans', function (Blueprint $table) {
             $table->id();
             $table->decimal('tabungan', 10, 2)->default(0.00);
-            $table->unsignedBigInteger('siswa_id');
-            $table->foreign('siswa_id')->references('id')->on('siswas')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

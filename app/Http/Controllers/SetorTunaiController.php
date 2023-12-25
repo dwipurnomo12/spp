@@ -2,29 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Siswa;
 use App\Models\Tabungan;
-use Barryvdh\DomPDF\Facade\pdf as PDF;
 use Illuminate\Http\Request;
 use App\Models\TabunganHistory;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use Barryvdh\DomPDF\Facade\pdf as PDF;
 use Illuminate\Support\Facades\Validator;
 
 class SetorTunaiController extends Controller
 {
     public function index()
     {
-        $siswas = Siswa::with('kelas')->get();
+        $user_id = User::whereNot('id', 1)->get();
         return view('setor-tunai.index', [
-            'TabunganIn'    => TabunganHistory::with('tabungan')->where('status', 'setor')->orderBy('id', 'DESC')->get(),
-            'siswas'        => $siswas,
+            'TabunganIn'   => TabunganHistory::with('tabungan')->where('status', 'setor')->orderBy('id', 'DESC')->get(),
+            'users'        => $user_id,
         ]);
     }
 
-    public function getDataSiswa($siswa_id)
+    public function getDataSiswa($user_id)
     {
-        $tabungan = Tabungan::where('siswa_id', $siswa_id)->first();
+        $tabungan = Tabungan::where('user_id', $user_id)->first();
 
         return response()->json($tabungan);
     }
@@ -43,9 +44,9 @@ class SetorTunaiController extends Controller
         }
 
         $status     = 'setor';
-        $siswaId    = $request->siswa_id;
+        $user_id    = $request->user_id;
 
-        $tabungan   = Tabungan::where('siswa_id', $siswaId)->first();
+        $tabungan   = Tabungan::where('user_id', $user_id)->first();
         if (!$tabungan) {
             return back()->with('error', 'Data tabungan tidak ditemukan');
         }

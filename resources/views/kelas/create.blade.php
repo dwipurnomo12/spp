@@ -46,18 +46,6 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="text">TIngkat <span style="color: red">*</span></label>
-                                    <select class="form-control" aria-label="Default select example" name="tingkat_id">
-                                        <option value="">Tentukan Tingkat Kelas</option>
-                                        @foreach ($tingkats as $tingkat)
-                                            <option value="{{ $tingkat->id }}">{{ $tingkat->tingkat }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('j_kelamin')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
                                     <label for="keterangan">Keterangan</label>
                                     <textarea class="form-control" name="keterangan" rows="5"></textarea>
                                     @error('keterangan')

@@ -98,7 +98,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>{{ $buktiPenarikan->tabungan->siswa->nm_siswa }}</td>
+                        <td>{{ $buktiPenarikan->tabungan->user->siswa->nm_siswa }}</td>
                         <td>Rp. {{ number_format($buktiPenarikan->nominal, 2) }}</td>
                         <td>{{ $buktiPenarikan->status }}</td>
                         <td>{{ $buktiPenarikan->created_at }}</td>

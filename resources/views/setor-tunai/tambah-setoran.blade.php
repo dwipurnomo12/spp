@@ -15,15 +15,15 @@
                         <div class="col">
                             <input type="hidden" id="tabungan_id">
                             <div class="form-group">
-                                <label for="siswa_id">Pilih Siswa <span style="color: red">*</span></label>
-                                <select id="siswa_id" class="js-stor-tunai" name="siswa_id" style="width: 100%">
+                                <label for="user_id">Pilih Siswa <span style="color: red">*</span></label>
+                                <select id="user_id" class="js-stor-tunai" name="user_id" style="width: 100%">
                                     <option value="">Pilih Siswa</option>
-                                    @foreach ($siswas as $siswa)
-                                        <option value="{{ $siswa->id }}">
-                                            {{ $siswa->nm_siswa }} - {{ $siswa->kelas->kelas }}</option>
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}">
+                                            {{ $user->siswa->nm_siswa }} - {{ $user->siswa->kelas->kelas }}</option>
                                     @endforeach
                                 </select>
-                                @error('siswa_id')
+                                @error('user_id')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>

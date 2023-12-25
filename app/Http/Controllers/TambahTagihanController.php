@@ -37,13 +37,14 @@ class TambahTagihanController extends Controller
 
         foreach ($request->input('kelas_id') as $kelasId) {
             $siswas = Kelas::find($kelasId)->siswas;
-            $tagihan->siswas()->attach($siswas, [
-                'total_tagihan' => 0.00,
-            ]);
-
             foreach ($siswas as $siswa) {
-                $totalBiaya = $tagihan->biayas()->sum('biaya'); // Sesuaikan dengan nama kolom yang benar
-                $tagihan->siswas()->updateExistingPivot($siswa->id, [
+                $user = $siswa->user;
+                $tagihan->users()->attach($user, [
+                    'total_tagihan' => 0.00,
+                ]);
+                $totalBiaya = $tagihan->biayas()->sum('biaya');
+
+                $tagihan->users()->updateExistingPivot($user->id, [
                     'total_tagihan' => $totalBiaya,
                 ]);
             }

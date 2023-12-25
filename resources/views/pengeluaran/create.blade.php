@@ -27,6 +27,13 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
+                    @if (session()->has('error'))
+                        <div class="card bg-danger text-white">
+                            <div class="card-body">
+                                {{ session('error') }}
+                            </div>
+                        </div>
+                    @endif
                     <div class="card">
                         <div class="card-header">
                             <div class="row">
@@ -43,7 +50,12 @@
                                         <input type="hidden" name="status" value="out">
                                         <input type="hidden" name="saldo_id" value="1">
                                         <div class="form-group">
-                                            <label for="nonial">Nominal Dana Keluar <span
+                                            <label for="saldo">Saldo Saat Ini</label>
+                                            <input type="text" class="form-control" name="saldo"
+                                                value="Rp. {{ number_format($saldo->saldo, 2) }}" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="nominal">Nominal Dana Keluar <span
                                                     style="color: red">*</span></label>
                                             <input type="number" class="form-control" name="nominal">
                                             @error('nominal')

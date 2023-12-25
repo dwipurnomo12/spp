@@ -16,7 +16,7 @@ class KelasController extends Controller
     public function index()
     {
         return view('kelas.index', [
-            'kelases'   => Kelas::with('tingkat')->orderBy('id', 'DESC')->get()
+            'kelases'   => Kelas::orderBy('id', 'DESC')->get()
         ]);
     }
 
@@ -25,9 +25,7 @@ class KelasController extends Controller
      */
     public function create()
     {
-        return view('kelas.create', [
-            'tingkats'  => Tingkat::all()
-        ]);
+        return view('kelas.create');
     }
 
     /**
@@ -37,11 +35,9 @@ class KelasController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'kelas'         => 'required',
-            'tingkat_id'    => 'required',
             'keterangan'    => 'required',
         ], [
             'kelas.required'        => 'Form tidak boleh kosong !',
-            'tingkat_id.required'   => 'Form select wajib dipilih !',
             'keterangan.required'   => 'Form tidak boleh kosong !'
         ]);
 
@@ -51,7 +47,6 @@ class KelasController extends Controller
 
         Kelas::create([
             'kelas'         => $request->kelas,
-            'tingkat_id'    => $request->tingkat_id,
             'keterangan'    => $request->keterangan
         ]);
 
@@ -66,7 +61,6 @@ class KelasController extends Controller
         $kelas = Kelas::find($id);
         return view('kelas.edit', [
             'kelas'     => $kelas,
-            'tingkats'  => Tingkat::all()
         ]);
     }
 
@@ -78,11 +72,9 @@ class KelasController extends Controller
         $kelas = Kelas::find($id);
         $validator = Validator::make($request->all(), [
             'kelas'         => 'required',
-            'tingkat_id'    => 'required',
             'keterangan'    => 'required',
         ], [
             'kelas.required'        => 'Form tidak boleh kosong !',
-            'tingkat_id.required'   => 'Form select wajib dipilih !',
             'keterangan.required'   => 'Form tidak boleh kosong !'
         ]);
 
@@ -92,7 +84,6 @@ class KelasController extends Controller
 
         $kelas->update([
             'kelas'         => $request->kelas,
-            'tingkat_id'    => $request->tingkat_id,
             'keterangan'    => $request->keterangan
         ]);
 

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use App\Models\Siswa;
 use App\Models\TabunganHistory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,9 +13,9 @@ class Tabungan extends Model
     use HasFactory;
     protected $guarded = ['id'];
 
-    public function siswa()
+    public function user()
     {
-        return $this->belongsTo(Siswa::class);
+        return $this->belongsTo(User::class);
     }
 
     public function tabunganHistories()

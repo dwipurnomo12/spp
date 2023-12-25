@@ -61,4 +61,15 @@ class User extends Authenticatable
     {
         return $this->hasOne(Siswa::class);
     }
+
+    public function tabungan()
+    {
+        return $this->hasOne(Tabungan::class);
+    }
+
+    public function tagihans()
+    {
+        return $this->belongsToMany(Tagihan::class, 'siswa_tagihan')
+            ->withPivot('status', 'total_tagihan');
+    }
 }

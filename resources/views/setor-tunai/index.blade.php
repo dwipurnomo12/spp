@@ -4,7 +4,7 @@
     <div class="content">
         <div class="page-inner">
             <div class="page-header">
-                <h4 class="page-title">Setor Tunai</h4>
+                <h4 class="page-title">Tabungan</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
                         <a href="/home">
@@ -22,8 +22,17 @@
             <div class="row">
                 <div class="col-md-12">
                     @if (session()->has('success'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('success') }}
+                        <div class="card bg-success text-white">
+                            <div class="card-body">
+                                {{ session('success') }}
+                            </div>
+                        </div>
+                    @endif
+                    @if (session()->has('error'))
+                        <div class="card bg-danger text-white">
+                            <div class="card-body">
+                                {{ session('error') }}
+                            </div>
                         </div>
                     @endif
                     <div class="row">
@@ -61,9 +70,11 @@
                                                         @foreach ($TabunganIn as $tabungan)
                                                             <tr>
                                                                 <td>{{ $loop->iteration }}</td>
-                                                                <th>{{ $tabungan->tabungan->siswa->nm_siswa }}</th>
+                                                                <th>{{ $tabungan->tabungan->user->siswa->nm_siswa }}</th>
                                                                 <td>Rp. {{ number_format($tabungan->nominal, 2) }}</td>
-                                                                <td>{{ $tabungan->status }}</td>
+                                                                <td><span
+                                                                        class="badge badge-success p-2">{{ $tabungan->status }}</span>
+                                                                </td>
                                                                 <td>{{ $tabungan->created_at }}</td>
                                                                 <td><a href="/setor-tunai/bukti-setoran/{{ $tabungan->id }}"
                                                                         class="btn btn-sm btn-success">

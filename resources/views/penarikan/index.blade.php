@@ -4,7 +4,7 @@
     <div class="content">
         <div class="page-inner">
             <div class="page-header">
-                <h4 class="page-title">Setor Tunai</h4>
+                <h4 class="page-title">Tabungan</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
                         <a href="/home">
@@ -22,8 +22,17 @@
             <div class="row">
                 <div class="col-md-12">
                     @if (session()->has('success'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('success') }}
+                        <div class="card bg-success text-white">
+                            <div class="card-body">
+                                {{ session('success') }}
+                            </div>
+                        </div>
+                    @endif
+                    @if (session()->has('error'))
+                        <div class="card bg-danger text-white">
+                            <div class="card-body">
+                                {{ session('error') }}
+                            </div>
                         </div>
                     @endif
                     <div class="row">
@@ -32,12 +41,11 @@
                                 <div class="card-header">
                                     <div class="row">
                                         <div class="col-lg-6">
-                                            <h4 class="card-title">Data Penarikan Tunai</h4>
+                                            <h4 class="card-title">Data Penarikan / Pencairan Saldo Tabungan</h4>
                                         </div>
                                         <div class="col-lg-6">
-                                            <button type="button" class="btn btn-primary btn-sm float-right"
-                                                data-toggle="modal" data-target="#menu-penarikan">
-                                                Menu Penarikan
+                                            <button class="btn btn-sm btn-primary float-right" id="menu-penarikan"> Menu
+                                                Penarikan
                                             </button>
                                         </div>
                                     </div>
@@ -61,9 +69,11 @@
                                                         @foreach ($tabunganOut as $tabungan)
                                                             <tr>
                                                                 <td>{{ $loop->iteration }}</td>
-                                                                <th>{{ $tabungan->tabungan->siswa->nm_siswa }}</th>
+                                                                <th>{{ $tabungan->tabungan->user->siswa->nm_siswa }}</th>
                                                                 <td>Rp. {{ number_format($tabungan->nominal, 2) }}</td>
-                                                                <td>{{ $tabungan->status }}</td>
+                                                                <td><span
+                                                                        class="badge badge-danger p-2">{{ $tabungan->status }}</span>
+                                                                </td>
                                                                 <td>{{ $tabungan->created_at }}</td>
                                                                 <td><a href="/penarikan/bukti-penarikan/{{ $tabungan->id }}"
                                                                         class="btn btn-sm btn-success">
@@ -109,6 +119,15 @@
         <script>
             $(document).ready(function() {
                 $('#table_id').DataTable();
+            });
+        </script>
+
+        <!-- Modal Menu Penarikan -->
+        <script>
+            $(document).ready(function() {
+                $("#menu-penarikan").click(function() {
+                    $("#modal-penarikan").modal("show");
+                });
             });
         </script>
     @endsection

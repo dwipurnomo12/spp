@@ -82,17 +82,17 @@
                                                     </thead>
                                                     <tbody>
 
-                                                        @foreach ($siswas as $siswa)
+                                                        @foreach ($users as $user)
                                                             <tr>
                                                                 <td>{{ $loop->iteration }}</td>
-                                                                <td>{{ $siswa->nm_siswa }}</td>
-                                                                <td>{{ $siswa->nis }}</td>
-                                                                <td>{{ $siswa->kelas->kelas }}</td>
+                                                                <td>{{ $user->siswa->nm_siswa }}</td>
+                                                                <td>{{ $user->siswa->nis }}</td>
+                                                                <td>{{ $user->siswa->kelas->kelas }}</td>
                                                                 <td>Rp.
-                                                                    {{ number_format($siswa->tabungan->tabungan, 2, ',', '.') }}
+                                                                    {{ number_format($user->tabungan->tabungan, 2, ',', '.') }}
                                                                 </td>
                                                                 <td>
-                                                                    <a href="/tabungan-siswa/history/{{ $siswa->id }}"
+                                                                    <a href="/tabungan-siswa/history/{{ $user->tabungan->id }}"
                                                                         class="btn btn-sm btn-primary">Cek History</a>
                                                                 </td>
                                                             </tr>

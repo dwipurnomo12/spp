@@ -52,7 +52,7 @@
 
                                         <?php $no = 1; ?>
                                         @foreach ($tagihans as $tagihan)
-                                            @foreach ($tagihan->siswas as $siswa)
+                                            @foreach ($tagihan->users as $siswa)
                                                 <tr>
                                                     <td>{{ $no++ }}</td>
                                                     <td>{{ $tagihan->nm_tagihan }}</td>
@@ -118,5 +118,25 @@
         $(document).ready(function() {
             $('#table_id').DataTable();
         });
+    </script>
+
+    <!-- Print struk -->
+    <script>
+        function cetakStruk(userId, tagihanId) {
+            fetch('/cek-tagihan/cetak-struk/' + userId + '/' + tagihanId, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
     </script>
 @endsection

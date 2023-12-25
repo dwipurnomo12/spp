@@ -46,7 +46,7 @@
                 </li>
                 <li class="nav-item {{ Request::is('siswa*', 'kelas*', 'tahun-ajaran*') ? 'active' : '' }}">
                     <a data-toggle="collapse" href="#base">
-                        <i class="fas fa-layer-group"></i>
+                        <i class="fas fa-users"></i>
                         <p>Data Siswa</p>
                         <span class="caret"></span>
                     </a>
@@ -70,6 +70,7 @@
 
                         </ul>
                     </div>
+                </li>
 
                 <li class="nav-item {{ Request::is('biaya*') ? 'active' : '' }}">
                     <a href="/biaya">
@@ -151,13 +152,14 @@
                     </span>
                     <h4 class="text-section">Tabungan</h4>
                 </li>
-                <li class="nav-item {{ Request::is('setor-tunai*', 'pencairan*') ? 'active' : '' }}">
-                    <a data-toggle="collapse" href="#tabungan">
+                <li
+                    class="nav-item {{ Request::is('tabungan-siswa*', 'setor-tunai*', 'penarikan*') ? 'active' : '' }}">
+                    <a data-toggle="collapse" href="#tabungann">
                         <i class="fa fa-solid fa-wallet"></i>
                         <p>Tabungan Siswa</p>
                         <span class="caret"></span>
                     </a>
-                    <div class="collapse" id="tabungan">
+                    <div class="collapse" id="tabungann">
                         <ul class="nav nav-collapse">
                             <li>
                                 <a href="/tabungan-siswa">
@@ -202,6 +204,12 @@
                     <a href="/cek-tagihan">
                         <i class="fa fa-solid fa-coins"></i>
                         <p>Cek Tagihan</p>
+                    </a>
+                </li>
+                <li class="nav-item {{ Request::is('tabungan*') ? 'active' : '' }}">
+                    <a href="/tabungan">
+                        <i class="fa fa-solid fa-wallet"></i>
+                        <p>Tabungan</p>
                     </a>
                 </li>
             @endif

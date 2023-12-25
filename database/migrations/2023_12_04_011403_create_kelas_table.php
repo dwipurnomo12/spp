@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('kelas');
             $table->text('keterangan');
-            $table->foreignId('tingkat_id');
+            $table->foreignId('thn_ajaran_id');
             $table->timestamps();
         });
     }

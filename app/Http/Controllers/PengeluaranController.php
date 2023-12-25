@@ -30,7 +30,10 @@ class PengeluaranController extends Controller
      */
     public function create()
     {
-        return view('pengeluaran.create');
+        $saldo = Saldo::firstOrFail();
+        return view('pengeluaran.create', [
+            'saldo' => $saldo
+        ]);
     }
 
     /**
@@ -52,6 +55,10 @@ class PengeluaranController extends Controller
         }
 
         $saldo = Saldo::first();
+        if ($request->nominal > $saldo->saldo) {
+            return back()->with('error', 'Oopss.. Saldo tidak cukup !');
+        }
+
         $saldo->saldo -= $request->nominal;
         $saldo->save();
 

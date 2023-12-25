@@ -20,9 +20,9 @@ class Tagihan extends Model
         return $this->belongsToMany(Kelas::class, 'tagihan_kelas');
     }
 
-    public function siswas()
+    public function users()
     {
-        return $this->belongsToMany(Siswa::class, 'siswa_tagihan')
+        return $this->belongsToMany(User::class, 'siswa_tagihan')
             ->withPivot('status', 'total_tagihan');
     }
 }

@@ -33,8 +33,10 @@ class TahunAjaranController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'thn_ajaran'    => 'required',
+            'status'        => 'required'
         ], [
-            'thn_ajaran.required'   => 'Form wajib diisi !'
+            'thn_ajaran.required'   => 'Form wajib diisi !',
+            'status.required'       => 'Wajib pilih status !'
         ]);
 
         if ($validator->fails()) {
@@ -42,7 +44,8 @@ class TahunAjaranController extends Controller
         }
 
         TahunAjaran::create([
-            'thn_ajaran'    => $request->thn_ajaran
+            'thn_ajaran'    => $request->thn_ajaran,
+            'status'        => $request->status
         ]);
 
         return redirect('/tahun-ajaran')->with('success', 'Berhasil menambahkan data');
@@ -67,8 +70,10 @@ class TahunAjaranController extends Controller
         $thnAjaran = TahunAjaran::find($id);
         $validator = Validator::make($request->all(), [
             'thn_ajaran'    => 'required',
+            'status'        => 'required'
         ], [
-            'thn_ajaran.required'   => 'Form wajib diisi !'
+            'thn_ajaran.required'   => 'Form wajib diisi !',
+            'status.required'       => 'Wajib pilih status !'
         ]);
 
         if ($validator->fails()) {
@@ -76,7 +81,8 @@ class TahunAjaranController extends Controller
         }
 
         $thnAjaran->update([
-            'thn_ajaran'    => $request->thn_ajaran
+            'thn_ajaran'    => $request->thn_ajaran,
+            'status'        => $request->status
         ]);
 
         return redirect('/tahun-ajaran')->with('success', 'Berhasil memperbarui data');

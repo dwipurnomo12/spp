@@ -22,8 +22,10 @@
             <div class="row">
                 <div class="col-md-12">
                     @if (session()->has('success'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('success') }}
+                        <div class="card bg-success text-white">
+                            <div class="card-body">
+                                {{ session('success') }}
+                            </div>
                         </div>
                     @endif
                     <div class="card">
@@ -46,6 +48,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Tahun Ajaran</th>
+                                            <th>Status</th>
                                             <th>Opsi</th>
                                         </tr>
                                     </thead>
@@ -54,6 +57,15 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $thn_ajaran->thn_ajaran }}</td>
+                                                <td>
+                                                    @if ($thn_ajaran->status == 'aktif')
+                                                        <span
+                                                            class="badge badge-success p-2">{{ $thn_ajaran->status }}</span>
+                                                    @else
+                                                        <span
+                                                            class="badge badge-danger p-2">{{ $thn_ajaran->status }}</span>
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     <a href="/tahun-ajaran/{{ $thn_ajaran->id }}/edit"
                                                         class="btn btn-sm btn-warning mb-2"><i class="fa fa-edit"></i></a>

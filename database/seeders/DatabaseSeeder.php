@@ -54,22 +54,22 @@ class DatabaseSeeder extends Seeder
         Kelas::create([
             'kelas'         => 'X TKR A',
             'keterangan'    => 'Teknik Kendaraan Ringan A',
-            'tingkat_id'    => 1
+            'thn_ajaran_id' => 1
         ]);
         Kelas::create([
             'kelas'         => 'X TKR B',
             'keterangan'    => 'Teknik Kendaraan Ringan B',
-            'tingkat_id'    => 1
+            'thn_ajaran_id' => 1
         ]);
         Kelas::create([
             'kelas'         => 'XI TKR A',
             'keterangan'    => 'Teknik Kendaraan Ringan A',
-            'tingkat_id'    => 2
+            'thn_ajaran_id' => 1
         ]);
         Kelas::create([
             'kelas'         => 'XI TKR B',
             'keterangan'    => 'Teknik Kendaraan Ringan B',
-            'tingkat_id'    => 2
+            'thn_ajaran_id' => 1
         ]);
 
         Siswa::create([
@@ -105,20 +105,25 @@ class DatabaseSeeder extends Seeder
 
         Tabungan::create([
             'tabungan'  => 0.00,
-            'siswa_id'  => 1
+            'user_id'  => 2
         ]);
         Tabungan::create([
             'tabungan'  => 0.00,
-            'siswa_id'  => 2
+            'user_id'  => 3
         ]);
         Tabungan::create([
             'tabungan'  => 0.00,
-            'siswa_id'  => 3
+            'user_id'  => 4
         ]);
 
 
         TahunAjaran::create([
-            'thn_ajaran'    => '2022/2024'
+            'thn_ajaran'    => '2022/2023',
+            'status'        => 'tidak aktif'
+        ]);
+        TahunAjaran::create([
+            'thn_ajaran'    => '2023/2024',
+            'status'        => 'aktif'
         ]);
 
         Biaya::create([
@@ -128,16 +133,6 @@ class DatabaseSeeder extends Seeder
         Biaya::create([
             'jenis_pembayaran'  => 'Sumbangan',
             'biaya'             => '50000'
-        ]);
-
-        Tingkat::create([
-            'tingkat'   => 'X'
-        ]);
-        Tingkat::create([
-            'tingkat'   => 'XI'
-        ]);
-        Tingkat::create([
-            'tingkat'   => 'XII'
         ]);
 
         Saldo::create([

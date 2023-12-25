@@ -22,8 +22,10 @@
             <div class="row">
                 <div class="col-md-12">
                     @if (session()->has('success'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('success') }}
+                        <div class="card bg-success text-white">
+                            <div class="card-body">
+                                {{ session('success') }}
+                            </div>
                         </div>
                     @endif
                     <div class="card">

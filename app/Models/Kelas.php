@@ -10,11 +10,6 @@ class Kelas extends Model
     use HasFactory;
     protected $guarded = ['id'];
 
-    public function tingkat()
-    {
-        return $this->belongsTo(Tingkat::class);
-    }
-
     public function siswas()
     {
         return $this->hasMany(Siswa::class);
@@ -23,5 +18,10 @@ class Kelas extends Model
     public function tagihans()
     {
         return $this->hasMany(Tagihan::class);
+    }
+
+    public function tahunAjaran()
+    {
+        return $this->belongsTo(TahunAjaran::class);
     }
 }

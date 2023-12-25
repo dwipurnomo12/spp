@@ -81,14 +81,14 @@
                                                     </thead>
                                                     <tbody>
 
-                                                        @foreach ($siswas as $siswa)
+                                                        @foreach ($users as $user)
                                                             <tr>
                                                                 <td>{{ $loop->iteration }}</td>
-                                                                <td>{{ $siswa->nm_siswa }}</td>
-                                                                <td>{{ $siswa->nis }}</td>
-                                                                <td>{{ $siswa->kelas->kelas }}</td>
+                                                                <td>{{ $user->siswa->nm_siswa }}</td>
+                                                                <td>{{ $user->siswa->nis }}</td>
+                                                                <td>{{ $user->siswa->kelas->kelas }}</td>
                                                                 <td>
-                                                                    <a href="/transaksi/detail/{{ $siswa->id }}"
+                                                                    <a href="/transaksi/detail/{{ $user->id }}"
                                                                         class="btn btn-sm btn-primary">Cek Tagihan</a>
                                                                 </td>
                                                             </tr>

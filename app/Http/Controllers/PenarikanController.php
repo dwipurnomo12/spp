@@ -2,29 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Siswa;
 use App\Models\Tabungan;
-use Barryvdh\DomPDF\Facade\pdf as PDF;
 use Illuminate\Http\Request;
 use App\Models\TabunganHistory;
 use App\Http\Controllers\Controller;
+use Barryvdh\DomPDF\Facade\pdf as PDF;
 use Illuminate\Support\Facades\Validator;
 
 class PenarikanController extends Controller
 {
     public function index()
     {
-        $siswas      = Siswa::with('kelas')->get();
+        $user_id = User::whereNot('id', 1)->get();
         $tabunganOut = TabunganHistory::with('tabungan')->where('status', 'penarikan')->orderBy('id', 'DESC')->get();
         return view('penarikan.index', [
             'tabunganOut'   => $tabunganOut,
-            'siswas'        => $siswas
+            'users'        => $user_id,
         ]);
     }
 
-    public function getDataSiswa($siswa_id)
+    public function getDataSiswa($user_id)
     {
-        $tabungan = Tabungan::where('siswa_id', $siswa_id)->first();
+        $tabungan = Tabungan::where('user_id', $user_id)->first();
 
         return response()->json($tabungan);
     }
@@ -43,9 +44,9 @@ class PenarikanController extends Controller
         }
 
         $status     = 'penarikan';
-        $siswaId    = $request->siswa_id;
+        $user_id    = $request->user_id;
 
-        $tabungan   = Tabungan::where('siswa_id', $siswaId)->first();
+        $tabungan   = Tabungan::where('user_id', $user_id)->first();
         if (!$tabungan) {
             return back()->with('error', 'Data tabungan tidak ditemukan');
         }

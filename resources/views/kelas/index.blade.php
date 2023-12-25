@@ -22,8 +22,10 @@
             <div class="row">
                 <div class="col-md-12">
                     @if (session()->has('success'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('success') }}
+                        <div class="card bg-success text-white">
+                            <div class="card-body">
+                                {{ session('success') }}
+                            </div>
                         </div>
                     @endif
                     <div class="card">
@@ -46,7 +48,6 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Kelas</th>
-                                            <th>Tingkat</th>
                                             <th>Keterangan</th>
                                             <th>Opsi</th>
                                         </tr>
@@ -56,7 +57,6 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $kelas->kelas }}</td>
-                                                <td>{{ $kelas->tingkat->tingkat }}</td>
                                                 <td>{{ $kelas->keterangan }}</td>
                                                 <td>
                                                     <a href="/kelas/{{ $kelas->id }}/edit"

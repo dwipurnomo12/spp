@@ -45,6 +45,17 @@
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
+                                <div class="form-group">
+                                    <label for="status">Status</label>
+                                    <select class="form-control" id="status" name="status">
+                                        <option value=""> -- Pilih Status -- </option>
+                                        <option value="aktif">Aktif</option>
+                                        <option value="tidak aktif">Tidak Aktif</option>
+                                    </select>
+                                    @error('status')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
 
                                 <button type="submit" class="btn btn-primary my-3 float-right">Simpan</button>
                             </form>

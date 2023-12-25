@@ -92,7 +92,15 @@
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td>Rp. {{ number_format($history->nominal, 2) }}</td>
-                                                        <td>{{ $history->status }}</td>
+                                                        <td>
+                                                            @if ($history->status == 'in')
+                                                                <span
+                                                                    class="badge badge-success p-2">{{ $history->status }}</span>
+                                                            @else
+                                                                <span
+                                                                    class="badge badge-danger p-2">{{ $history->status }}</span>
+                                                            @endif
+                                                        </td>
                                                         <td>{{ $history->keterangan }}</td>
                                                         <td>{{ $history->created_at }}</td>
                                                     </tr>

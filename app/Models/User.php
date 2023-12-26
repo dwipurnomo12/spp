@@ -70,6 +70,6 @@ class User extends Authenticatable
     public function tagihans()
     {
         return $this->belongsToMany(Tagihan::class, 'siswa_tagihan')
-            ->withPivot('status', 'total_tagihan');
+            ->withPivot('status', 'total_tagihan', 'metode_pembayaran');
     }
 }

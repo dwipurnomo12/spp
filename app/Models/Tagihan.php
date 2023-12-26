@@ -23,6 +23,6 @@ class Tagihan extends Model
     public function users()
     {
         return $this->belongsToMany(User::class, 'siswa_tagihan')
-            ->withPivot('status', 'total_tagihan');
+            ->withPivot('status', 'total_tagihan', 'metode_pembayaran');
     }
 }

@@ -92,6 +92,7 @@
                 <thead>
                     <tr>
                         <th>Status</th>
+                        <th>Metode Pembayaran</th>
                         <th>Rincian</th>
                         <th>Total Tagihan</th>
                     </tr>
@@ -101,6 +102,9 @@
                         <tr>
                             <td>
                                 {{ $user->pivot->status }}
+                            </td>
+                            <td>
+                                {{ $user->pivot->metode_pembayaran }}
                             </td>
                             <td>
                                 @foreach ($tagihan->biayas as $biaya)

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign('tagihan_id')->references('id')->on('tagihans')->onDelete('cascade');
             $table->enum('status', ['belum_dibayar', 'lunas'])->default('belum_dibayar');
             $table->decimal('total_tagihan', 10, 2)->default(0.00);
+            $table->enum('metode_pembayaran', ['cash', 'tabungan', 'mandiri']);
             $table->timestamps();
         });
     }

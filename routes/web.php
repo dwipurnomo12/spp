@@ -86,6 +86,8 @@ Route::middleware(['auth', 'IsAdmin'])->group(function () {
     Route::get('/transaksi', [TransaksiPembayaranController::class, 'index']);
     Route::get('/transaksi/detail/{id}', [TransaksiPembayaranController::class, 'detail']);
     Route::post('/transaksi/bayar', [TransaksiPembayaranController::class, 'bayar']);
+    Route::post('/transaksi/bayar-tabungan', [TransaksiPembayaranController::class, 'bayarByTabungan']);
+    Route::get('/transaksi/bayar-tabungan/get-data-tabungan/{user_id}', [TransaksiPembayaranController::class, 'getDataTabungan']);
     Route::get('/transaksi/cetak-struk/{userId}/{tagihanId}', [TransaksiPembayaranController::class, 'cetakStruk']);
 });
 

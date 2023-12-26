@@ -7,8 +7,10 @@ use App\Models\Kelas;
 use App\Models\Saldo;
 use App\Models\Siswa;
 use App\Models\Tagihan;
+use App\Models\Tabungan;
 use App\Models\SaldoHistory;
 use Illuminate\Http\Request;
+use App\Models\TabunganHistory;
 use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade\pdf as PDF;
 
@@ -62,8 +64,8 @@ class TransaksiPembayaranController extends Controller
         $userId    = $request->input('user_id');
         $tagihanId = $request->input('tagihan_id');
 
-        $user       = User::find($userId);
-        $tagihan    = Tagihan::with(['users' => function ($query) use ($user) {
+        $user = User::find($userId);
+        $tagihan = Tagihan::with(['users' => function ($query) use ($user) {
             $query->where('user_id', $user->id);
         }])->find($tagihanId);
 
@@ -86,10 +88,69 @@ class TransaksiPembayaranController extends Controller
         $saldoHistory->save();
 
         $user->tagihans()->updateExistingPivot($tagihanId, [
-            'status'    => 'lunas'
+            'metode_pembayaran'  => 'cash',
+            'status'             => 'lunas'
         ]);
 
         return response()->json(['success' => true]);
+    }
+
+
+    public function getDataTabungan($user_id)
+    {
+        $saldoTabungan = Tabungan::where('user_id', $user_id)->value('tabungan');
+        return response()->json(['saldoTabungan' => $saldoTabungan]);
+    }
+
+    public function bayarByTabungan(Request $request)
+    {
+        $userId    = $request->input('user_id');
+        $tagihanId = $request->input('tagihan_id');
+
+        $user       = User::find($userId);
+        $tagihan    = Tagihan::with(['users' => function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        }])->find($tagihanId);
+
+        if (!$user || !$tagihan) {
+            return response()->json(['error' => 'Siswa atau tagihan tidak ditemukan'], 404);
+        }
+
+        $nominal = $tagihan->users->first()->pivot->total_tagihan;
+
+        $saldoTabungan = Tabungan::where('user_id', $user->id)->first();
+        if ($saldoTabungan->tabungan >= $nominal) {
+            $saldo = Saldo::first();
+            $saldo->saldo += $nominal;
+            $saldo->save();
+
+            $saldoTabungan->tabungan -= $nominal;
+            $saldoTabungan->save();
+
+            $tabunganHistory = new TabunganHistory([
+                'tabungan_id'   => $saldoTabungan->id,
+                'nominal'       => $nominal,
+                'status'        => 'penarikan'
+            ]);
+            $tabunganHistory->save();
+
+            $saldoHistory = new SaldoHistory([
+                'saldo_id'      => $saldo->id,
+                'nominal'       => $nominal,
+                'keterangan'    => 'Pembayaran tagihan sekolah menggunakan tabungan untuk siswa ' . $user->siswa->nm_siswa,
+                'status'        => 'in'
+            ]);
+            $saldoHistory->save();
+
+            $user->tagihans()->updateExistingPivot($tagihanId, [
+                'metode_pembayaran' => 'tabungan',
+                'status'            => 'lunas'
+            ]);
+
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['error' => 'Saldo tabungan siswa tidak mencukupi'], 400);
+        }
     }
 
     public function cetakStruk($userId, $tagihanId)

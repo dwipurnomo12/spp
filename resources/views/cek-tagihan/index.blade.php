@@ -82,8 +82,7 @@
                                                     </td>
                                                     <td>
                                                         @if ($siswa->pivot->status == 'belum_dibayar')
-                                                            <a href="javascript:void(0)"
-                                                                onclick="konfirmasiPembayaran('{{ $siswa->id }}', '{{ $tagihan->id }}')"
+                                                            <a href="/cek-tagihan/{{ $siswa->id }}/{{ $tagihan->id }}/bayar"
                                                                 class="btn btn-sm btn-success">
                                                                 <i class="fa fa-solid fa-money-bill-wave"></i>
                                                                 Bayar

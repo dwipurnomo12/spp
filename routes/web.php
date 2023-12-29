@@ -94,6 +94,8 @@ Route::middleware(['auth', 'IsAdmin'])->group(function () {
 Route::middleware(['auth', 'IsSiswa'])->group(function () {
     Route::get('/cek-tagihan', [CekTagihanController::class, 'index']);
     Route::get('/cek-tagihan/cetak-struk/{userId}/{tagihanId}', [CekTagihanController::class, 'cetakStruk']);
+    Route::get('/cek-tagihan/{siswaId}/{tagihanId}/bayar', [CekTagihanController::class, 'bayar']);
+    Route::post('/cek-tagihan/bayar', [CekTagihanController::class, 'store']);
 
     Route::get('/tabungan', [TabunganController::class, 'index']);
 });

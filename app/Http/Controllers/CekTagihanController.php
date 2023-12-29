@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Tagihan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Payment\TripayPaymentController;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\pdf as PDF;
 
@@ -22,6 +23,34 @@ class CekTagihanController extends Controller
         return view('cek-tagihan.index', [
             'tagihans' => $tagihans
         ]);
+    }
+
+    public function bayar($siswaId, $tagihanId)
+    {
+        $user           = User::findOrFail($siswaId);
+        $tagihan        = Tagihan::findOrFail($tagihanId);
+        $detailTagihan  = Tagihan::with(['users' => function ($query) {
+            $query->where('user_id', auth()->user()->id);
+        }, 'biayas'])->findOrFail($tagihanId);
+
+        $tripay     = new TripayPaymentController;
+        $channels   = $tripay->getPaymentChannels();
+
+        return view('cek-tagihan.bayar', [
+            'user'          => $user,
+            'tagihan'       => $tagihan,
+            'channels'      => $channels,
+            'detailTagihan' => $detailTagihan
+        ]);
+    }
+
+    public function store(Request $request)
+    {
+        $tagihanId = Tagihan::find($request->tagihan_id);
+        $method    = $request->method;
+
+        $tripay     = new TripayPaymentController;
+        $tripay->requestTransaction($tagihanId, $method);
     }
 
     public function cetakStruk($userId, $tagihanId)

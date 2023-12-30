@@ -21,6 +21,7 @@ use App\Http\Controllers\KenaikanKelasController;
 use App\Http\Controllers\TabunganSiswaController;
 use App\Http\Controllers\TambahTagihanController;
 use App\Http\Controllers\TransaksiPembayaranController;
+use App\Http\Controllers\TransaksiSiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,7 +96,9 @@ Route::middleware(['auth', 'IsSiswa'])->group(function () {
     Route::get('/cek-tagihan', [CekTagihanController::class, 'index']);
     Route::get('/cek-tagihan/cetak-struk/{userId}/{tagihanId}', [CekTagihanController::class, 'cetakStruk']);
     Route::get('/cek-tagihan/{siswaId}/{tagihanId}/bayar', [CekTagihanController::class, 'bayar']);
-    Route::post('/cek-tagihan/bayar', [CekTagihanController::class, 'store']);
+
+    Route::POST('/transaksi-siswa', [TransaksiSiswaController::class, 'store']);
+    Route::get('/transaksi-siswa/{reference}', [TransaksiSiswaController::class, 'detail'])->name('transaksi-siswa.detail');
 
     Route::get('/tabungan', [TabunganController::class, 'index']);
 });

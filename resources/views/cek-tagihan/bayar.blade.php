@@ -117,7 +117,36 @@
                                 @foreach ($channels as $channel)
                                     @if ($channel->active == true && $channel->group == 'Virtual Account')
                                         <div class="col-md-3">
-                                            <form action="/cek-tagihan/bayar" method="POST">
+                                            <form action="/transaksi-siswa" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="tagihan_id" value="{{ $detailTagihan->id }}">
+                                                <input type="hidden" name="method" value="{{ $channel->code }}">
+                                                <div class="card">
+                                                    <button type="submit" class="btn btn-light">
+                                                        <div class="card-body pb-0">
+                                                            <img src="{{ $channel->icon_url }}" alt="{{ $channel->name }}"
+                                                                class="img-fluid mb-2" width="50">
+                                                            <p>{{ $channel->name }}</p>
+                                                        </div>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
+
+                            <div class="row mt-4">
+                                <div class="col-md-12">
+                                    <h5>E-Wallet</h5>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                @foreach ($channels as $channel)
+                                    @if ($channel->active == true && $channel->group == 'E-Wallet')
+                                        <div class="col-md-3">
+                                            <form action="/transaksi-siswa" method="POST">
                                                 @csrf
                                                 <input type="hidden" name="tagihan_id" value="{{ $detailTagihan->id }}">
                                                 <input type="hidden" name="method" value="{{ $channel->code }}">
@@ -144,22 +173,28 @@
 
                             <div class="row">
                                 @foreach ($channels as $channel)
-                                    @if ($channel->active == true && $channel->group == 'E-Wallet')
+                                    @if ($channel->active == true && $channel->group == 'Convenience Store')
                                         <div class="col-md-3">
-                                            <div class="card">
-                                                <div class="card-body pb-0">
-                                                    <img src="{{ $channel->icon_url }}" alt="{{ $channel->name }}"
-                                                        class="img-fluid mb-2" width="50">
-                                                    <p>{{ $channel->name }}</p>
+                                            <form action="/transaksi-siswa" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="tagihan_id" value="{{ $detailTagihan->id }}">
+                                                <input type="hidden" name="method" value="{{ $channel->code }}">
+                                                <div class="card">
+                                                    <button class="btn btn-light">
+                                                        <div class="card-body pb-0">
+                                                            <img src="{{ $channel->icon_url }}"
+                                                                alt="{{ $channel->name }}" class="img-fluid mb-2"
+                                                                width="50">
+                                                            <p>{{ $channel->name }}</p>
+                                                        </div>
+                                                    </button>
                                                 </div>
-                                            </div>
+                                            </form>
                                         </div>
                                     @endif
                                 @endforeach
                             </div>
                         </div>
-
-
                     </div>
                 </div>
 

@@ -14,12 +14,10 @@
              </a>
          </li>
 
-
-
          <li class="nav-item dropdown hidden-caret">
              <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
                  <div class="avatar-sm">
-                     <img src="../assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+                     <img src="/assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
                  </div>
              </a>
              <ul class="dropdown-menu dropdown-user animated fadeIn">

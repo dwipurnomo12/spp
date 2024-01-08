@@ -20,8 +20,11 @@ use App\Http\Controllers\DataKelulusanController;
 use App\Http\Controllers\KenaikanKelasController;
 use App\Http\Controllers\TabunganSiswaController;
 use App\Http\Controllers\TambahTagihanController;
-use App\Http\Controllers\TransaksiPembayaranController;
 use App\Http\Controllers\TransaksiSiswaController;
+use App\Http\Controllers\Payment\TripayCallbackController;
+use App\Http\Controllers\RiwayatPembayaranController;
+use App\Http\Controllers\TransaksiPembayaranController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -97,8 +100,12 @@ Route::middleware(['auth', 'IsSiswa'])->group(function () {
     Route::get('/cek-tagihan/cetak-struk/{userId}/{tagihanId}', [CekTagihanController::class, 'cetakStruk']);
     Route::get('/cek-tagihan/{siswaId}/{tagihanId}/bayar', [CekTagihanController::class, 'bayar']);
 
+    Route::get('/riwayat-pembayaran', [RiwayatPembayaranController::class, 'index']);
+
     Route::POST('/transaksi-siswa', [TransaksiSiswaController::class, 'store']);
     Route::get('/transaksi-siswa/{reference}', [TransaksiSiswaController::class, 'detail'])->name('transaksi-siswa.detail');
 
     Route::get('/tabungan', [TabunganController::class, 'index']);
 });
+
+Route::POST('/callback', [TripayCallbackController::class, 'handle']);

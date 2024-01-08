@@ -206,10 +206,23 @@
                         <p>Cek Tagihan</p>
                     </a>
                 </li>
+                <li class="nav-item {{ Request::is('riwayat-pembayaran*') ? 'active' : '' }}">
+                    <a href="/riwayat-pembayaran">
+                        <i class="fa fa-solid fa-coins"></i>
+                        <p>Riwayat Pembayaran</p>
+                    </a>
+                </li>
+
+                <li class="nav-section">
+                    <span class="sidebar-mini-icon">
+                        <i class="fa fa-ellipsis-h"></i>
+                    </span>
+                    <h4 class="text-section">Tabungan</h4>
+                </li>
                 <li class="nav-item {{ Request::is('tabungan*') ? 'active' : '' }}">
                     <a href="/tabungan">
                         <i class="fa fa-solid fa-wallet"></i>
-                        <p>Tabungan</p>
+                        <p>Saldo Tabungan</p>
                     </a>
                 </li>
             @endif

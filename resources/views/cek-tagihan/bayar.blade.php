@@ -167,7 +167,7 @@
 
                             <div class="row mt-4">
                                 <div class="col-md-12">
-                                    <h5>E-Wallet</h5>
+                                    <h5>Toko Retail</h5>
                                 </div>
                             </div>
 

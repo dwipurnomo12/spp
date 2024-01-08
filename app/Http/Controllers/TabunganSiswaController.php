@@ -14,6 +14,7 @@ class TabunganSiswaController extends Controller
     public function index()
     {
         $users = User::with(['siswa', 'tabungan'])->whereNot('id', 1)->get();
+
         return view('tabungan-siswa.index', [
             'users'     => $users,
             'kelases'   => Kelas::all()

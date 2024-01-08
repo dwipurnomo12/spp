@@ -12,7 +12,7 @@ class TabunganController extends Controller
     {
         $user_id = auth()->user()->id;
         return view('tabungan.index', [
-            'tabungan'          => Tabungan::with(['user', 'tabunganHistories'])->where('user_id', $user_id)->first()
+            'tabungan'          => Tabungan::with(['user', 'tabunganHistories'])->where('user_id', $user_id)->firstOrFail()
         ]);
     }
 }

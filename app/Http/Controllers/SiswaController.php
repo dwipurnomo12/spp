@@ -86,9 +86,9 @@ class SiswaController extends Controller
             'password'      => bcrypt('1234'),
         ]);
 
-        $tabungan = Tabungan::create([
+        Tabungan::create([
             'tabungan'  => 0.00,
-            'siswa_id'  => $user->id,
+            'user_id'   => $user->id,
         ]);
 
         Siswa::create([

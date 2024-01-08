@@ -18,6 +18,11 @@ class Tabungan extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function siswa()
+    {
+        return $this->hasOne(Siswa::class);
+    }
+
     public function tabunganHistories()
     {
         return $this->hasMany(TabunganHistory::class);

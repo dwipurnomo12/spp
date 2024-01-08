@@ -49,15 +49,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Tampilkan gambar QR Code -->
-                                    <div class="text-center mt-4">
-                                        <img src="{{ $detail->qr_url }}" alt="QR Code" class="img-fluid"
-                                            style="max-width: 80%;">
-                                    </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div class="col-md-5">
